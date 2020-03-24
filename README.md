@@ -1,5 +1,12 @@
-# golang-distributed-parallel-image-processing
+# Distributed Parallel Image Processing Application
 
-Dependencies Commands:
+## Language
+- Golang
+
+## Contributors
+- Alan Enrique Maldonado Navarro
+- Guillermo Gonzalez Mena
+
+### Dependencies Commands:
 go get -u github.com/labstack/echo/...
 go get github.com/dgrijalva/jwt-go
