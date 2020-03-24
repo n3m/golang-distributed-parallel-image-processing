@@ -16,11 +16,19 @@ func main() {
 		switch mod.Method {
 		case "GET":
 			fmt.Println("\tGET:\t" + mod.Path)
-			e.GET(mod.Path, mod.Function)
+			if mod.Middleware != nil {
+				e.GET(mod.Path, mod.Function, *mod.Middleware)
+			} else {
+				e.GET(mod.Path, mod.Function)
+			}
 			break
 		case "POST":
 			fmt.Println("\tPOST:\t" + mod.Path)
-			e.POST(mod.Path, mod.Function)
+			if mod.Middleware != nil {
+				e.POST(mod.Path, mod.Function, *mod.Middleware)
+			} else {
+				e.POST(mod.Path, mod.Function)
+			}
 			break
 		}
 	}
