@@ -8,5 +8,5 @@
 - Guillermo Gonzalez Mena
 
 ### Dependencies Commands:
-go get -u github.com/labstack/echo/...
-go get github.com/dgrijalva/jwt-go
+- go get -u github.com/labstack/echo/...
+- go get github.com/dgrijalva/jwt-go
