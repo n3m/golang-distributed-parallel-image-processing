@@ -21,8 +21,6 @@ func StatusResponse(c echo.Context) error {
 	if !valid {
 		return helpers.ReturnJSON(c, http.StatusConflict, "Token is invalid or revoked")
 	}
-
-	fmt.Println("[ACCESS] New connection to:\t/status")
 	return helpers.ReturnJSONMap(c, http.StatusOK, map[string]string{
 		"message": "Hi " + claims["user"].(string) + ", the Distributed Parallel Image Processing System is up and running!",
 		"time":    time.Now().String(),

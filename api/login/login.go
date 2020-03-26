@@ -2,14 +2,13 @@ package login
 
 import (
 	"fmt"
+	"golang-distributed-parallel-image-processing/api/helpers"
 	"net/http"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 )
-
-var ActiveTokens map[string]bool = make(map[string]bool)
 
 func LoginResponse(c echo.Context) error {
 	fmt.Println("[ACCESS] New connection to:\t/login")
@@ -25,7 +24,7 @@ func LoginResponse(c echo.Context) error {
 			return err
 		}
 		claims["token"] = t
-		ActiveTokens[t] = true
+		helpers.ActiveTokens[t] = true
 		fmt.Println("\t[OPERATION] Generated token")
 		return c.JSON(http.StatusOK, map[string]string{
 
@@ -33,5 +32,5 @@ func LoginResponse(c echo.Context) error {
 			"token":   t,
 		})
 	}
-	return echo.ErrUnauthorized
+	return helpers.ReturnJSON(c, http.StatusConflict, "[ERROR] Credentials are wrong")
 }
