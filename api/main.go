@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 //Module ...
@@ -21,6 +22,15 @@ type Module struct {
 
 type Message struct {
 	Message string `json:"message"`
+}
+
+var IsLoggedIn = checkIfLoggedIn()
+
+func checkIfLoggedIn() echo.MiddlewareFunc {
+	data := middleware.JWTWithConfig(middleware.JWTConfig{
+		SigningKey: []byte("secret"),
+	})
+	return data
 }
 
 // LoadModules ...
@@ -37,19 +47,22 @@ func LoadModules() []*Module {
 			Function: login.LoginResponse,
 		},
 		&Module{
-			Method:   "POST",
-			Path:     "/logout",
-			Function: logout.LogoutResponse, //TODO Add a function response for logout
+			Method:     "POST",
+			Path:       "/logout",
+			Function:   logout.LogoutResponse,
+			Middleware: &IsLoggedIn,
 		},
 		&Module{
-			Method:   "GET",
-			Path:     "/status",
-			Function: status.StatusResponse, //TODO Add a function response for status
+			Method:     "GET",
+			Path:       "/status",
+			Function:   status.StatusResponse,
+			Middleware: &IsLoggedIn,
 		},
 		&Module{
-			Method:   "POST",
-			Path:     "/upload",
-			Function: upload.UploadResponse, //TODO Add a function response for upload
+			Method:     "POST",
+			Path:       "/upload",
+			Function:   upload.UploadResponse,
+			Middleware: &IsLoggedIn,
 		},
 	}
 }
