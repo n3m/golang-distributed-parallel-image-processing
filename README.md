@@ -11,6 +11,6 @@
 - go get -u github.com/labstack/echo/...
 - go get github.com/dgrijalva/jwt-go
 
-
 curl -X POST -d "username=admin&password=password" http://localhost:8080/login
-curl -X POST -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODU0NDExNzAsInVzZXIiOiJhZG1pbiJ9.9vp0BTCLNupYmY6HtOVxLGkuD3ePNpX9NT6uH1FqB3c" localhost:8080/logout
+curl -X POST -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODU0NDIzOTgsInVzZXIiOiJhZG1pbiJ9.DJzp2ttD4tIALaIDUzzOBmBTqjDw9LsjnZgTK3ivcbE" localhost:8080/logout
+curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODU0NDIzOTgsInVzZXIiOiJhZG1pbiJ9.DJzp2ttD4tIALaIDUzzOBmBTqjDw9LsjnZgTK3ivcbE" localhost:8080/status
