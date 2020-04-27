@@ -44,6 +44,7 @@ func UploadResponse(c echo.Context) error {
 	if _, err = io.Copy(dst, src); err != nil {
 		return errors.New("[] " + err.Error())
 	}
+
 	fmt.Println("\t[OPERATION] Uploaded Image")
 	return helpers.ReturnJSONMap(c, http.StatusOK, map[string]string{
 		"message":  "An image has been successfully uploaded",
