@@ -6,6 +6,7 @@ import (
 	"golang-distributed-parallel-image-processing/api/logout"
 	"golang-distributed-parallel-image-processing/api/status"
 	"golang-distributed-parallel-image-processing/api/upload"
+	"golang-distributed-parallel-image-processing/models"
 	"net/http"
 
 	"github.com/labstack/echo"
@@ -18,10 +19,6 @@ type Module struct {
 	Path       string
 	Function   echo.HandlerFunc
 	Middleware *echo.MiddlewareFunc
-}
-
-type Message struct {
-	Message string `json:"message"`
 }
 
 var IsLoggedIn = checkIfLoggedIn()
@@ -69,5 +66,5 @@ func LoadModules() []*Module {
 
 func rootResponse(c echo.Context) error {
 	fmt.Println("[ACCESS] New connection to:\t/")
-	return c.JSON(http.StatusForbidden, &Message{Message: "You're not allowed to do this. [AM - Nothing here to see]"})
+	return c.JSON(http.StatusForbidden, &models.Message{Message: "You're not allowed to do this. [AM - Nothing here to see]"})
 }
