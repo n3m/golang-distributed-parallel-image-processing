@@ -26,3 +26,7 @@ func StatusResponse(c echo.Context) error {
 		"time":    time.Now().String(),
 	})
 }
+
+func StatusWorkerResponse(c echo.Context) error {
+	return helpers.ReturnJSON(c, http.StatusOK, "StatusWorkerResponse!")
+}
