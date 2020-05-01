@@ -16,20 +16,19 @@ func main() {
 	APIPort := ":8080"
 	DBName := "workers"
 	currentWorkers := map[string]interface{}{}
-	/* - */
 
-	/* Controller Setup */
-	go controller.Start(ControllerConnectionURL, currentWorkers)
-	log.Printf("[SETUP] Controller Connection URL: %+v", ControllerConnectionURL)
-	/* - */
-
-	/* API EndPoint Setup */
-
-	e := echo.New()
-	_, err := db.New(DBName)
+	/* DB Setup */
+	db, err := db.New(DBName)
 	if err != nil {
 		panic(err)
 	}
+
+	/* Controller Setup */
+	go controller.Start(ControllerConnectionURL, currentWorkers, db)
+	log.Printf("[SETUP] Controller Connection URL: %+v", ControllerConnectionURL)
+
+	/* API EndPoint Setup */
+	e := echo.New()
 
 	modules := api.LoadModules()
 	fmt.Println("== URLs Loaded == ")
@@ -55,7 +54,6 @@ func main() {
 	}
 
 	go e.Logger.Fatal(e.Start(APIPort))
-	/* - */
 
 	/* Scheduler Setup */
 	// jobs := make(chan scheduler.Job)
@@ -68,5 +66,4 @@ func main() {
 	// 	jobs <- sampleJob
 	// 	time.Sleep(time.Second * 5)
 	// }
-	/* - */
 }

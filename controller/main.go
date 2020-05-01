@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/sonyarouje/simdb/db"
 	"go.nanomsg.org/mangos"
 
 	// register transports
@@ -18,7 +19,7 @@ func die(format string, v ...interface{}) {
 	os.Exit(1)
 }
 
-func Start(controllerAddress string, currentWorkers map[string]interface{}) {
+func Start(controllerAddress string, currentWorkers map[string]interface{}, db *db.Driver) {
 	errorMessage := "[ERR] Controller -> "
 	socket, err := surveyor.NewSocket()
 	if err != nil {

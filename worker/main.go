@@ -10,6 +10,7 @@ import (
 
 	pb "github.com/CodersSquad/dc-labs/challenges/third-partial/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/profiling/proto"
 
 	// register transports
 	"go.nanomsg.org/mangos/protocol/respondent"
@@ -22,7 +23,7 @@ var (
 
 // server is used to implement helloworld.GreeterServer.
 type server struct {
-	pb.UnimplementedGreeterServer
+	proto.UnimplementedProfilingServer
 }
 
 var (
@@ -47,7 +48,7 @@ func init() {
 
 /* Response Functions */
 
-func (s *server) RespondWithDetails(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+func (s *server) RespondWithStatus(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	log.Printf("\t[W] %v I've received a request to send my details! %v", workerName, in.GetName())
 	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
 }

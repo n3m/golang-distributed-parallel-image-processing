@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.gdip.worker";
+option java_outer_classname = "worker";
+
+package proto;
+
+service Worker {
+  rpc ResponseDetails (Request) returns (DetailsReply) {}
+  rpc ResponseStatus (Request) returns (StatusReply) {}
+  rpc ResponseWorkload (Request) returns (WorkloadReply) {}
+  rpc ResponseWorkerName (Request) returns (WorkernameReply) {}
+}
+
+message Request {
+    string msg = 1;
+}
+
+message DetailsReply {
+    string workername = 1;
+    string status = 2;
+    int64 workload = 3;
+}
+
+message WorkernameReply {
+    string workername = 1;
+}
+
+message StatusReply {
+    string status = 1;
+}
+
+message WorkloadReply {
+    int64 workload = 1;
+}
+
