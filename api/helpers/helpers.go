@@ -1,6 +1,8 @@
 package helpers
 
 import (
+	"golang-distributed-parallel-image-processing/models"
+
 	"github.com/labstack/echo"
 )
 
@@ -19,4 +21,9 @@ func ReturnJSON(c echo.Context, status int, data string) error {
 
 func ReturnJSONMap(c echo.Context, status int, data map[string]string) error {
 	return c.JSON(status, &data)
+}
+
+type CustomContext struct {
+	echo.Context
+	DB map[string]models.Worker
 }

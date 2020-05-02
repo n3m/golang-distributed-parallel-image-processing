@@ -6,6 +6,7 @@ import (
 	"golang-distributed-parallel-image-processing/api/logout"
 	"golang-distributed-parallel-image-processing/api/status"
 	"golang-distributed-parallel-image-processing/api/upload"
+	"golang-distributed-parallel-image-processing/api/workloads"
 	"golang-distributed-parallel-image-processing/models"
 	"net/http"
 
@@ -33,38 +34,44 @@ func checkIfLoggedIn() echo.MiddlewareFunc {
 // LoadModules ...
 func LoadModules() []*Module {
 	return []*Module{
-		&Module{
+		{
 			Method:   "GET",
 			Path:     "/",
 			Function: rootResponse,
 		},
-		&Module{
+		{
 			Method:   "POST",
 			Path:     "/login",
 			Function: login.LoginResponse,
 		},
-		&Module{
+		{
 			Method:     "POST",
 			Path:       "/logout",
 			Function:   logout.LogoutResponse,
 			Middleware: &IsLoggedIn,
 		},
-		&Module{
+		{
 			Method:     "GET",
 			Path:       "/status",
 			Function:   status.StatusResponse,
 			Middleware: &IsLoggedIn,
 		},
-		&Module{
+		{
 			Method:     "GET",
 			Path:       "/status/:worker",
 			Function:   status.StatusWorkerResponse,
 			Middleware: &IsLoggedIn,
 		},
-		&Module{
+		{
 			Method:     "POST",
 			Path:       "/upload",
 			Function:   upload.UploadResponse,
+			Middleware: &IsLoggedIn,
+		},
+		{
+			Method:     "GET",
+			Path:       "/workloads/test",
+			Function:   workloads.WorkloadsResponse,
 			Middleware: &IsLoggedIn,
 		},
 	}

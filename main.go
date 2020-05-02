@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"golang-distributed-parallel-image-processing/api"
+	"golang-distributed-parallel-image-processing/api/helpers"
 	"golang-distributed-parallel-image-processing/controller"
 	"golang-distributed-parallel-image-processing/models"
 	"log"
@@ -30,6 +31,12 @@ func main() {
 
 	/* API EndPoint Setup */
 	e := echo.New()
+	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			cc := &helpers.CustomContext{c, currentWorkers}
+			return next(cc)
+		}
+	})
 
 	modules := api.LoadModules()
 	fmt.Println("== URLs Loaded == ")
