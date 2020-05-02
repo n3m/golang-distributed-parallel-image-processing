@@ -8,7 +8,8 @@ import (
 	"net"
 	"os"
 
-	pb "github.com/CodersSquad/dc-labs/challenges/third-partial/proto"
+	pb "golang-distributed-parallel-image-processing/proto"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/profiling/proto"
 
@@ -31,6 +32,7 @@ var (
 	workerName        = ""
 	tags              = ""
 	usage             = 0
+	status            = "Idle"
 )
 
 /* System Functions */
@@ -48,14 +50,24 @@ func init() {
 
 /* Response Functions */
 
-func (s *server) RespondWithStatus(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	log.Printf("\t[W] %v I've received a request to send my details! %v", workerName, in.GetName())
-	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
+func (s *server) ResponseDetails(ctx context.Context, in *pb.DetailsRequest) (*pb.DetailsReply, error) {
+	return &pb.DetailsReply{Status: status, Workername: workerName, Workload: int64(usage)}, nil
 }
 
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	log.Printf("RPC: Received: %v", in.GetName())
-	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
+func (s *server) ResponseStatus(ctx context.Context, in *pb.StatusRequest) (*pb.StatusReply, error) {
+	return &pb.StatusReply{Status: status}, nil
+}
+
+func (s *server) ResponseWorkload(ctx context.Context, in *pb.WorkloadRequest) (*pb.WorkloadReply, error) {
+	return &pb.WorkloadReply{Workload: int64(usage)}, nil
+}
+
+func (s *server) ResponseWorkerName(ctx context.Context, in *pb.WorkerNameRequest) (*pb.WorkerNameReply, error) {
+	return &pb.WorkerNameReply{Workername: workerName}, nil
+}
+
+func (s *server) ResponsePong(ctx context.Context, in *pb.PingRequest) (*pb.PongReply, error) {
+	return &pb.PongReply{Msg: "Pong"}, nil
 }
 
 func joinCluster() {
@@ -116,13 +128,13 @@ func main() {
 
 	// Setup Worker RPC Server
 	rpcPort := getAvailablePort()
-	log.Printf("Starting RPC Service on localhost:%v", rpcPort)
+	log.Printf("[W] "+workerName+": Starting RPC Service on localhost:%v", rpcPort)
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", rpcPort))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterGreeterServer(s, &server{})
+	pb.RegisterControllerServer(s, &server{})
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}

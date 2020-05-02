@@ -6,11 +6,11 @@ option java_outer_classname = "worker";
 
 package proto;
 
-service Worker {
+service Controller {
   rpc ResponseDetails (DetailsRequest) returns (DetailsReply) {}
-  rpc ResponseStatus (WorkerNameRequest) returns (StatusReply) {}
-  rpc ResponseWorkload (StatusRequest) returns (WorkloadReply) {}
-  rpc ResponseWorkerName (WorkloadRequest) returns (WorkernameReply) {}
+  rpc ResponseStatus (StatusRequest) returns (StatusReply) {}
+  rpc ResponseWorkload (WorkloadRequest) returns (WorkloadReply) {}
+  rpc ResponseWorkerName (WorkerNameRequest) returns (WorkerNameReply) {}
   rpc ResponsePong (PingRequest) returns (PongReply) {}
 }
 
@@ -46,7 +46,7 @@ message DetailsReply {
     int64 workload = 3;
 }
 
-message WorkernameReply {
+message WorkerNameReply {
     string workername = 1;
 }
 
