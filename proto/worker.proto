@@ -11,7 +11,19 @@ service Worker {
   rpc ResponseStatus (WorkerNameRequest) returns (StatusReply) {}
   rpc ResponseWorkload (StatusRequest) returns (WorkloadReply) {}
   rpc ResponseWorkerName (WorkloadRequest) returns (WorkernameReply) {}
+  rpc ResponsePong (PingRequest) returns (PongReply) {}
 }
+
+/*Ping Pong*/
+message PingRequest {
+    string msg = 1;
+}
+
+message PongReply {
+    string msg = 1;
+}
+
+/*Requests*/
 
 message DetailsRequest {
     string msg = 1;
@@ -25,6 +37,8 @@ message StatusRequest {
 message WorkloadRequest {
     string msg = 1;
 }
+
+/*Replies*/
 
 message DetailsReply {
     string workername = 1;

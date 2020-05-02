@@ -29,6 +29,101 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
+//Ping Pong
+type PingRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
+}
+
+func (x *PingRequest) Reset() {
+	*x = PingRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_worker_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PingRequest) ProtoMessage() {}
+
+func (x *PingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_worker_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PingRequest.ProtoReflect.Descriptor instead.
+func (*PingRequest) Descriptor() ([]byte, []int) {
+	return file_worker_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *PingRequest) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+type PongReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
+}
+
+func (x *PongReply) Reset() {
+	*x = PongReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_worker_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PongReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PongReply) ProtoMessage() {}
+
+func (x *PongReply) ProtoReflect() protoreflect.Message {
+	mi := &file_worker_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PongReply.ProtoReflect.Descriptor instead.
+func (*PongReply) Descriptor() ([]byte, []int) {
+	return file_worker_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *PongReply) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 type DetailsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -40,7 +135,7 @@ type DetailsRequest struct {
 func (x *DetailsRequest) Reset() {
 	*x = DetailsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_worker_proto_msgTypes[0]
+		mi := &file_worker_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -53,7 +148,7 @@ func (x *DetailsRequest) String() string {
 func (*DetailsRequest) ProtoMessage() {}
 
 func (x *DetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_worker_proto_msgTypes[0]
+	mi := &file_worker_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66,7 +161,7 @@ func (x *DetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetailsRequest.ProtoReflect.Descriptor instead.
 func (*DetailsRequest) Descriptor() ([]byte, []int) {
-	return file_worker_proto_rawDescGZIP(), []int{0}
+	return file_worker_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DetailsRequest) GetMsg() string {
@@ -87,7 +182,7 @@ type WorkerNameRequest struct {
 func (x *WorkerNameRequest) Reset() {
 	*x = WorkerNameRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_worker_proto_msgTypes[1]
+		mi := &file_worker_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -100,7 +195,7 @@ func (x *WorkerNameRequest) String() string {
 func (*WorkerNameRequest) ProtoMessage() {}
 
 func (x *WorkerNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_worker_proto_msgTypes[1]
+	mi := &file_worker_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -113,7 +208,7 @@ func (x *WorkerNameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkerNameRequest.ProtoReflect.Descriptor instead.
 func (*WorkerNameRequest) Descriptor() ([]byte, []int) {
-	return file_worker_proto_rawDescGZIP(), []int{1}
+	return file_worker_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *WorkerNameRequest) GetMsg() string {
@@ -134,7 +229,7 @@ type StatusRequest struct {
 func (x *StatusRequest) Reset() {
 	*x = StatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_worker_proto_msgTypes[2]
+		mi := &file_worker_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -147,7 +242,7 @@ func (x *StatusRequest) String() string {
 func (*StatusRequest) ProtoMessage() {}
 
 func (x *StatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_worker_proto_msgTypes[2]
+	mi := &file_worker_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -160,7 +255,7 @@ func (x *StatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusRequest.ProtoReflect.Descriptor instead.
 func (*StatusRequest) Descriptor() ([]byte, []int) {
-	return file_worker_proto_rawDescGZIP(), []int{2}
+	return file_worker_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *StatusRequest) GetMsg() string {
@@ -181,7 +276,7 @@ type WorkloadRequest struct {
 func (x *WorkloadRequest) Reset() {
 	*x = WorkloadRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_worker_proto_msgTypes[3]
+		mi := &file_worker_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -194,7 +289,7 @@ func (x *WorkloadRequest) String() string {
 func (*WorkloadRequest) ProtoMessage() {}
 
 func (x *WorkloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_worker_proto_msgTypes[3]
+	mi := &file_worker_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -207,7 +302,7 @@ func (x *WorkloadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkloadRequest.ProtoReflect.Descriptor instead.
 func (*WorkloadRequest) Descriptor() ([]byte, []int) {
-	return file_worker_proto_rawDescGZIP(), []int{3}
+	return file_worker_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *WorkloadRequest) GetMsg() string {
@@ -230,7 +325,7 @@ type DetailsReply struct {
 func (x *DetailsReply) Reset() {
 	*x = DetailsReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_worker_proto_msgTypes[4]
+		mi := &file_worker_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -243,7 +338,7 @@ func (x *DetailsReply) String() string {
 func (*DetailsReply) ProtoMessage() {}
 
 func (x *DetailsReply) ProtoReflect() protoreflect.Message {
-	mi := &file_worker_proto_msgTypes[4]
+	mi := &file_worker_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -256,7 +351,7 @@ func (x *DetailsReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetailsReply.ProtoReflect.Descriptor instead.
 func (*DetailsReply) Descriptor() ([]byte, []int) {
-	return file_worker_proto_rawDescGZIP(), []int{4}
+	return file_worker_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DetailsReply) GetWorkername() string {
@@ -291,7 +386,7 @@ type WorkernameReply struct {
 func (x *WorkernameReply) Reset() {
 	*x = WorkernameReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_worker_proto_msgTypes[5]
+		mi := &file_worker_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -304,7 +399,7 @@ func (x *WorkernameReply) String() string {
 func (*WorkernameReply) ProtoMessage() {}
 
 func (x *WorkernameReply) ProtoReflect() protoreflect.Message {
-	mi := &file_worker_proto_msgTypes[5]
+	mi := &file_worker_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +412,7 @@ func (x *WorkernameReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkernameReply.ProtoReflect.Descriptor instead.
 func (*WorkernameReply) Descriptor() ([]byte, []int) {
-	return file_worker_proto_rawDescGZIP(), []int{5}
+	return file_worker_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *WorkernameReply) GetWorkername() string {
@@ -338,7 +433,7 @@ type StatusReply struct {
 func (x *StatusReply) Reset() {
 	*x = StatusReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_worker_proto_msgTypes[6]
+		mi := &file_worker_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -351,7 +446,7 @@ func (x *StatusReply) String() string {
 func (*StatusReply) ProtoMessage() {}
 
 func (x *StatusReply) ProtoReflect() protoreflect.Message {
-	mi := &file_worker_proto_msgTypes[6]
+	mi := &file_worker_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -364,7 +459,7 @@ func (x *StatusReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusReply.ProtoReflect.Descriptor instead.
 func (*StatusReply) Descriptor() ([]byte, []int) {
-	return file_worker_proto_rawDescGZIP(), []int{6}
+	return file_worker_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *StatusReply) GetStatus() string {
@@ -385,7 +480,7 @@ type WorkloadReply struct {
 func (x *WorkloadReply) Reset() {
 	*x = WorkloadReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_worker_proto_msgTypes[7]
+		mi := &file_worker_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -398,7 +493,7 @@ func (x *WorkloadReply) String() string {
 func (*WorkloadReply) ProtoMessage() {}
 
 func (x *WorkloadReply) ProtoReflect() protoreflect.Message {
-	mi := &file_worker_proto_msgTypes[7]
+	mi := &file_worker_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -411,7 +506,7 @@ func (x *WorkloadReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkloadReply.ProtoReflect.Descriptor instead.
 func (*WorkloadReply) Descriptor() ([]byte, []int) {
-	return file_worker_proto_rawDescGZIP(), []int{7}
+	return file_worker_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *WorkloadReply) GetWorkload() int64 {
@@ -425,7 +520,11 @@ var File_worker_proto protoreflect.FileDescriptor
 
 var file_worker_proto_rawDesc = []byte{
 	0x0a, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x22, 0x0a, 0x0e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1f, 0x0a, 0x0b, 0x50, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x1d, 0x0a, 0x09, 0x50, 0x6f, 0x6e, 0x67, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x22, 0x0a, 0x0e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x25, 0x0a, 0x11, 0x57, 0x6f, 0x72,
 	0x6b, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10,
@@ -449,7 +548,7 @@ var file_worker_proto_rawDesc = []byte{
 	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x2b, 0x0a, 0x0d, 0x57, 0x6f, 0x72, 0x6b, 0x6c, 0x6f,
 	0x61, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x1a, 0x0a, 0x08, 0x77, 0x6f, 0x72, 0x6b, 0x6c,
 	0x6f, 0x61, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x77, 0x6f, 0x72, 0x6b, 0x6c,
-	0x6f, 0x61, 0x64, 0x32, 0x95, 0x02, 0x0a, 0x06, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x12, 0x3f,
+	0x6f, 0x61, 0x64, 0x32, 0xcd, 0x02, 0x0a, 0x06, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x12, 0x3f,
 	0x0a, 0x0f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c,
 	0x73, 0x12, 0x15, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c,
 	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
@@ -466,10 +565,13 @@ var file_worker_proto_rawDesc = []byte{
 	0x6f, 0x72, 0x6b, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72,
-	0x6e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x1f, 0x0a, 0x13, 0x69,
-	0x6f, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x67, 0x64, 0x69, 0x70, 0x2e, 0x77, 0x6f, 0x72, 0x6b,
-	0x65, 0x72, 0x42, 0x06, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x50, 0x01, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x36, 0x0a, 0x0c, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x50, 0x6f, 0x6e, 0x67, 0x12, 0x12, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x6f, 0x6e, 0x67, 0x52, 0x65, 0x70, 0x6c,
+	0x79, 0x22, 0x00, 0x42, 0x1f, 0x0a, 0x13, 0x69, 0x6f, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x67,
+	0x64, 0x69, 0x70, 0x2e, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x42, 0x06, 0x77, 0x6f, 0x72, 0x6b,
+	0x65, 0x72, 0x50, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -484,28 +586,32 @@ func file_worker_proto_rawDescGZIP() []byte {
 	return file_worker_proto_rawDescData
 }
 
-var file_worker_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_worker_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_worker_proto_goTypes = []interface{}{
-	(*DetailsRequest)(nil),    // 0: proto.DetailsRequest
-	(*WorkerNameRequest)(nil), // 1: proto.WorkerNameRequest
-	(*StatusRequest)(nil),     // 2: proto.StatusRequest
-	(*WorkloadRequest)(nil),   // 3: proto.WorkloadRequest
-	(*DetailsReply)(nil),      // 4: proto.DetailsReply
-	(*WorkernameReply)(nil),   // 5: proto.WorkernameReply
-	(*StatusReply)(nil),       // 6: proto.StatusReply
-	(*WorkloadReply)(nil),     // 7: proto.WorkloadReply
+	(*PingRequest)(nil),       // 0: proto.PingRequest
+	(*PongReply)(nil),         // 1: proto.PongReply
+	(*DetailsRequest)(nil),    // 2: proto.DetailsRequest
+	(*WorkerNameRequest)(nil), // 3: proto.WorkerNameRequest
+	(*StatusRequest)(nil),     // 4: proto.StatusRequest
+	(*WorkloadRequest)(nil),   // 5: proto.WorkloadRequest
+	(*DetailsReply)(nil),      // 6: proto.DetailsReply
+	(*WorkernameReply)(nil),   // 7: proto.WorkernameReply
+	(*StatusReply)(nil),       // 8: proto.StatusReply
+	(*WorkloadReply)(nil),     // 9: proto.WorkloadReply
 }
 var file_worker_proto_depIdxs = []int32{
-	0, // 0: proto.Worker.ResponseDetails:input_type -> proto.DetailsRequest
-	1, // 1: proto.Worker.ResponseStatus:input_type -> proto.WorkerNameRequest
-	2, // 2: proto.Worker.ResponseWorkload:input_type -> proto.StatusRequest
-	3, // 3: proto.Worker.ResponseWorkerName:input_type -> proto.WorkloadRequest
-	4, // 4: proto.Worker.ResponseDetails:output_type -> proto.DetailsReply
-	6, // 5: proto.Worker.ResponseStatus:output_type -> proto.StatusReply
-	7, // 6: proto.Worker.ResponseWorkload:output_type -> proto.WorkloadReply
-	5, // 7: proto.Worker.ResponseWorkerName:output_type -> proto.WorkernameReply
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	2, // 0: proto.Worker.ResponseDetails:input_type -> proto.DetailsRequest
+	3, // 1: proto.Worker.ResponseStatus:input_type -> proto.WorkerNameRequest
+	4, // 2: proto.Worker.ResponseWorkload:input_type -> proto.StatusRequest
+	5, // 3: proto.Worker.ResponseWorkerName:input_type -> proto.WorkloadRequest
+	0, // 4: proto.Worker.ResponsePong:input_type -> proto.PingRequest
+	6, // 5: proto.Worker.ResponseDetails:output_type -> proto.DetailsReply
+	8, // 6: proto.Worker.ResponseStatus:output_type -> proto.StatusReply
+	9, // 7: proto.Worker.ResponseWorkload:output_type -> proto.WorkloadReply
+	7, // 8: proto.Worker.ResponseWorkerName:output_type -> proto.WorkernameReply
+	1, // 9: proto.Worker.ResponsePong:output_type -> proto.PongReply
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -518,7 +624,7 @@ func file_worker_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_worker_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DetailsRequest); i {
+			switch v := v.(*PingRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -530,7 +636,7 @@ func file_worker_proto_init() {
 			}
 		}
 		file_worker_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WorkerNameRequest); i {
+			switch v := v.(*PongReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -542,7 +648,7 @@ func file_worker_proto_init() {
 			}
 		}
 		file_worker_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatusRequest); i {
+			switch v := v.(*DetailsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -554,7 +660,7 @@ func file_worker_proto_init() {
 			}
 		}
 		file_worker_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WorkloadRequest); i {
+			switch v := v.(*WorkerNameRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -566,7 +672,7 @@ func file_worker_proto_init() {
 			}
 		}
 		file_worker_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DetailsReply); i {
+			switch v := v.(*StatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -578,7 +684,7 @@ func file_worker_proto_init() {
 			}
 		}
 		file_worker_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WorkernameReply); i {
+			switch v := v.(*WorkloadRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -590,7 +696,7 @@ func file_worker_proto_init() {
 			}
 		}
 		file_worker_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatusReply); i {
+			switch v := v.(*DetailsReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -602,6 +708,30 @@ func file_worker_proto_init() {
 			}
 		}
 		file_worker_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*WorkernameReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_worker_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatusReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_worker_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*WorkloadReply); i {
 			case 0:
 				return &v.state
@@ -620,7 +750,7 @@ func file_worker_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_worker_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -650,6 +780,7 @@ type WorkerClient interface {
 	ResponseStatus(ctx context.Context, in *WorkerNameRequest, opts ...grpc.CallOption) (*StatusReply, error)
 	ResponseWorkload(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*WorkloadReply, error)
 	ResponseWorkerName(ctx context.Context, in *WorkloadRequest, opts ...grpc.CallOption) (*WorkernameReply, error)
+	ResponsePong(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PongReply, error)
 }
 
 type workerClient struct {
@@ -696,12 +827,22 @@ func (c *workerClient) ResponseWorkerName(ctx context.Context, in *WorkloadReque
 	return out, nil
 }
 
+func (c *workerClient) ResponsePong(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PongReply, error) {
+	out := new(PongReply)
+	err := c.cc.Invoke(ctx, "/proto.Worker/ResponsePong", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkerServer is the server API for Worker service.
 type WorkerServer interface {
 	ResponseDetails(context.Context, *DetailsRequest) (*DetailsReply, error)
 	ResponseStatus(context.Context, *WorkerNameRequest) (*StatusReply, error)
 	ResponseWorkload(context.Context, *StatusRequest) (*WorkloadReply, error)
 	ResponseWorkerName(context.Context, *WorkloadRequest) (*WorkernameReply, error)
+	ResponsePong(context.Context, *PingRequest) (*PongReply, error)
 }
 
 // UnimplementedWorkerServer can be embedded to have forward compatible implementations.
@@ -719,6 +860,9 @@ func (*UnimplementedWorkerServer) ResponseWorkload(context.Context, *StatusReque
 }
 func (*UnimplementedWorkerServer) ResponseWorkerName(context.Context, *WorkloadRequest) (*WorkernameReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResponseWorkerName not implemented")
+}
+func (*UnimplementedWorkerServer) ResponsePong(context.Context, *PingRequest) (*PongReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResponsePong not implemented")
 }
 
 func RegisterWorkerServer(s *grpc.Server, srv WorkerServer) {
@@ -797,6 +941,24 @@ func _Worker_ResponseWorkerName_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Worker_ResponsePong_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkerServer).ResponsePong(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.Worker/ResponsePong",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkerServer).ResponsePong(ctx, req.(*PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Worker_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "proto.Worker",
 	HandlerType: (*WorkerServer)(nil),
@@ -816,6 +978,10 @@ var _Worker_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResponseWorkerName",
 			Handler:    _Worker_ResponseWorkerName_Handler,
+		},
+		{
+			MethodName: "ResponsePong",
+			Handler:    _Worker_ResponsePong_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
