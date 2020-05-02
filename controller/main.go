@@ -2,8 +2,11 @@ package controller
 
 import (
 	"fmt"
+	"golang-distributed-parallel-image-processing/models"
 	"log"
 	"os"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/sonyarouje/simdb/db"
@@ -19,7 +22,7 @@ func die(format string, v ...interface{}) {
 	os.Exit(1)
 }
 
-func Start(controllerAddress string, currentWorkers map[string]interface{}, db *db.Driver) {
+func Start(controllerAddress string, currentWorkers map[string]models.Worker, db *db.Driver) {
 	errorMessage := "[ERR] Controller -> "
 	socket, err := surveyor.NewSocket()
 	if err != nil {
@@ -39,13 +42,19 @@ func Start(controllerAddress string, currentWorkers map[string]interface{}, db *
 	for {
 		time.Sleep(time.Second)
 		if seconds == 9 {
-			log.Printf("Current Online Workers: %+v, -> %v", len(currentWorkers), currentWorkers)
+			log.Printf("Online Workers: ")
+			for w, val := range currentWorkers {
+				if val.Active {
+					log.Printf("\t- %+v: -> Status: %+v", w, val.Status)
+				}
+			}
 		}
 		if seconds < 10 {
 			seconds += 1
 		} else {
 			seconds = 0
 		}
+		log.Printf("%+v", "C_T:CALL")
 
 		err = socket.Send([]byte("Is anyone there?"))
 		if err != nil {
@@ -57,12 +66,19 @@ func Start(controllerAddress string, currentWorkers map[string]interface{}, db *
 			if err != nil {
 				break
 			}
-			workerName := string(msg)
-			if currentWorkers[workerName] == nil {
-				log.Printf("[C] Controller: Found a new Worker")
-				currentWorkers[workerName] = 1
-			}
-
+			worker := ParseResponse(string(msg))
+			currentWorkers[worker.Name] = worker
 		}
 	}
+}
+
+func ParseResponse(msg string) models.Worker {
+	worker := models.Worker{}
+	data := strings.Split(msg, "|")
+	worker.Name = data[0]
+	worker.Status = data[1]
+	usage, _ := strconv.Atoi(data[2])
+	worker.Usage = usage
+	worker.Active = true
+	return worker
 }

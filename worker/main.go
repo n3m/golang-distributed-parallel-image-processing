@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"strconv"
 
 	pb "golang-distributed-parallel-image-processing/proto"
 
@@ -72,8 +73,8 @@ func (s *server) ResponsePong(ctx context.Context, in *pb.PingRequest) (*pb.Pong
 
 func joinCluster() {
 	errorMessage := "[ERR] Worker: (" + workerName + ") -> "
+	workerData := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags
 	var err error
-
 	socket, err := respondent.NewSocket()
 	if err != nil {
 		die(errorMessage + err.Error())
@@ -90,7 +91,7 @@ func joinCluster() {
 			die(errorMessage + "Error while Recv() ->" + err.Error())
 		}
 		if seconds == 9 {
-			log.Printf("[Worker] %v:I've been pinged! ", workerName)
+			log.Printf("[Worker] %v: I've been pinged! ", workerName)
 		}
 		if seconds < 10 {
 			seconds++
@@ -98,7 +99,7 @@ func joinCluster() {
 			seconds = 0
 		}
 
-		err = socket.Send([]byte(workerName))
+		err = socket.Send([]byte(workerData))
 		if err != nil {
 			die(errorMessage + err.Error())
 		}

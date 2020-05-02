@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"golang-distributed-parallel-image-processing/api"
 	"golang-distributed-parallel-image-processing/controller"
+	"golang-distributed-parallel-image-processing/models"
 	"log"
 
 	"github.com/labstack/echo"
@@ -15,7 +16,7 @@ func main() {
 	ControllerConnectionURL := "tcp://localhost:40899"
 	APIPort := ":8080"
 	DBName := "workers"
-	currentWorkers := map[string]interface{}{}
+	currentWorkers := map[string]models.Worker{}
 
 	/* DB Setup */
 	db, err := db.New(DBName)
