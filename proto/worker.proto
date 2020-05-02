@@ -7,13 +7,22 @@ option java_outer_classname = "worker";
 package proto;
 
 service Worker {
-  rpc ResponseDetails (Request) returns (DetailsReply) {}
-  rpc ResponseStatus (Request) returns (StatusReply) {}
-  rpc ResponseWorkload (Request) returns (WorkloadReply) {}
-  rpc ResponseWorkerName (Request) returns (WorkernameReply) {}
+  rpc ResponseDetails (DetailsRequest) returns (DetailsReply) {}
+  rpc ResponseStatus (WorkerNameRequest) returns (StatusReply) {}
+  rpc ResponseWorkload (StatusRequest) returns (WorkloadReply) {}
+  rpc ResponseWorkerName (WorkloadRequest) returns (WorkernameReply) {}
 }
 
-message Request {
+message DetailsRequest {
+    string msg = 1;
+}
+message WorkerNameRequest {
+    string msg = 1;
+}
+message StatusRequest {
+    string msg = 1;
+}
+message WorkloadRequest {
     string msg = 1;
 }
 
