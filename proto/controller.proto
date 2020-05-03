@@ -7,54 +7,16 @@ option java_outer_classname = "worker";
 package proto;
 
 service Controller {
-  rpc ResponseDetails (DetailsRequest) returns (DetailsReply) {}
-  rpc ResponseStatus (StatusRequest) returns (StatusReply) {}
-  rpc ResponseWorkload (WorkloadRequest) returns (WorkloadReply) {}
-  rpc ResponseWorkerName (WorkerNameRequest) returns (WorkerNameReply) {}
-  rpc ResponsePong (PingRequest) returns (PongReply) {}
+    rpc CreateJob(JobRequest) returns (JobReply) {}
 }
 
-/*Ping Pong*/
-message PingRequest {
+message JobRequest {
     string msg = 1;
 }
-
-message PongReply {
-    string msg = 1;
-}
-
-/*Requests*/
-
-message DetailsRequest {
-    string msg = 1;
-}
-message WorkerNameRequest {
-    string msg = 1;
-}
-message StatusRequest {
-    string msg = 1;
-}
-message WorkloadRequest {
-    string msg = 1;
-}
-
 /*Replies*/
 
-message DetailsReply {
-    string workername = 1;
-    string status = 2;
-    int64 workload = 3;
+message JobReply {
+    string msg = 1;
 }
 
-message WorkerNameReply {
-    string workername = 1;
-}
-
-message StatusReply {
-    string status = 1;
-}
-
-message WorkloadReply {
-    int64 workload = 1;
-}
 

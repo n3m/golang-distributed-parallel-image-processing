@@ -54,7 +54,6 @@ func Start(controllerAddress string, currentWorkers map[string]models.Worker, db
 		} else {
 			seconds = 0
 		}
-		log.Printf("%+v", "C_T:CALL")
 
 		err = socket.Send([]byte("Is anyone there?"))
 		if err != nil {
@@ -78,6 +77,8 @@ func ParseResponse(msg string) models.Worker {
 	worker.Name = data[0]
 	worker.Status = data[1]
 	usage, _ := strconv.Atoi(data[2])
+	port, _ := strconv.Atoi(data[3])
+	worker.Port = port
 	worker.Usage = usage
 	worker.Active = true
 	return worker

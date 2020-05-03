@@ -40,7 +40,7 @@ func LoadModules() []*Module {
 			Function: rootResponse,
 		},
 		{
-			Method:   "POST",
+			Method:   "GET",
 			Path:     "/login",
 			Function: login.LoginResponse,
 		},

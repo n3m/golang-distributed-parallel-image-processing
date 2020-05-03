@@ -34,6 +34,7 @@ var (
 	tags              = ""
 	usage             = 0
 	status            = "Idle"
+	port              = 0
 )
 
 /* System Functions */
@@ -51,29 +52,18 @@ func init() {
 
 /* Response Functions */
 
-func (s *server) ResponseDetails(ctx context.Context, in *pb.DetailsRequest) (*pb.DetailsReply, error) {
-	return &pb.DetailsReply{Status: status, Workername: workerName, Workload: int64(usage)}, nil
-}
-
-func (s *server) ResponseStatus(ctx context.Context, in *pb.StatusRequest) (*pb.StatusReply, error) {
-	return &pb.StatusReply{Status: status}, nil
-}
-
-func (s *server) ResponseWorkload(ctx context.Context, in *pb.WorkloadRequest) (*pb.WorkloadReply, error) {
-	return &pb.WorkloadReply{Workload: int64(usage)}, nil
-}
-
-func (s *server) ResponseWorkerName(ctx context.Context, in *pb.WorkerNameRequest) (*pb.WorkerNameReply, error) {
-	return &pb.WorkerNameReply{Workername: workerName}, nil
-}
-
-func (s *server) ResponsePong(ctx context.Context, in *pb.PingRequest) (*pb.PongReply, error) {
-	return &pb.PongReply{Msg: "Pong"}, nil
+func (s *server) CreateJob(ctx context.Context, in *pb.JobRequest) (*pb.JobReply, error) {
+	switch in.Msg {
+	case "test":
+		return &pb.JobReply{Msg: "Ping Pong!"}, nil
+	default:
+		return &pb.JobReply{Msg: "RPC not valid"}, nil
+	}
 }
 
 func joinCluster() {
 	errorMessage := "[ERR] Worker: (" + workerName + ") -> "
-	workerData := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags
+	workerData := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags + "|" + strconv.Itoa(port)
 	var err error
 	socket, err := respondent.NewSocket()
 	if err != nil {
@@ -129,6 +119,7 @@ func main() {
 
 	// Setup Worker RPC Server
 	rpcPort := getAvailablePort()
+	port = rpcPort
 	log.Printf("[W] "+workerName+": Starting RPC Service on localhost:%v", rpcPort)
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", rpcPort))
 	if err != nil {

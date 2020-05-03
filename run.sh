@@ -1,2 +1,9 @@
 ./worker --controller tcp://localhost:40899 --worker-name Ciry --tags gpu,nvidia, assets, static
 ./worker --controller tcp://localhost:40899 --worker-name Miranda --tags gpu,nvidia, assets, static
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODg3MTI2MzIsInVzZXIiOiJhZG1pbiJ9.YpGtq9hmBlhlD2JdKMx0ISXoH4fa6ibV8LBKQFk3ElY
+
+curl -u admin:password http://localhost:8080/login
+curl -F "data=boom.png" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODg3MTQ2MzIsInVzZXIiOiJhZG1pbiJ9.90olqfqerEKJiZ8j-urJHR4w7RoyauIRttrn3UNlfG4" http://localhost:8080/upload
+curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/status
+curl -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/logout

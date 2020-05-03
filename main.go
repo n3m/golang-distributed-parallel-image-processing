@@ -6,6 +6,7 @@ import (
 	"golang-distributed-parallel-image-processing/api/helpers"
 	"golang-distributed-parallel-image-processing/controller"
 	"golang-distributed-parallel-image-processing/models"
+	"golang-distributed-parallel-image-processing/scheduler"
 	"log"
 
 	"github.com/labstack/echo"
@@ -25,6 +26,10 @@ func main() {
 		panic(err)
 	}
 
+	/* Scheduler Setup */
+	jobs := make(chan scheduler.Job)
+	go scheduler.Start(jobs, currentWorkers)
+
 	/* Controller Setup */
 	go controller.Start(ControllerConnectionURL, currentWorkers, db)
 	log.Printf("[SETUP] Controller Connection URL: %+v", ControllerConnectionURL)
@@ -33,7 +38,7 @@ func main() {
 	e := echo.New()
 	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			cc := &helpers.CustomContext{c, currentWorkers}
+			cc := &helpers.CustomContext{c, currentWorkers, jobs}
 			return next(cc)
 		}
 	})
@@ -63,15 +68,4 @@ func main() {
 
 	go e.Logger.Fatal(e.Start(APIPort))
 
-	/* Scheduler Setup */
-	// jobs := make(chan scheduler.Job)
-	// go scheduler.Start(jobs)
-
-	// sampleJob := scheduler.Job{Address: "localhost:50051", RPCName: "hello"}
-
-	// for {
-	// 	sampleJob.RPCName = fmt.Sprintf("hello-%v", rand.Intn(10000))
-	// 	jobs <- sampleJob
-	// 	time.Sleep(time.Second * 5)
-	// }
 }

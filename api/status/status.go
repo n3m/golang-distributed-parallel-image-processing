@@ -22,9 +22,24 @@ func StatusResponse(c echo.Context) error {
 	if !valid {
 		return helpers.ReturnJSON(c, http.StatusConflict, "Token is invalid or revoked")
 	}
-	return helpers.ReturnJSONMap(c, http.StatusOK, map[string]string{
+
+	workers := []map[string]interface{}{}
+	cc := c.(*helpers.CustomContext)
+	for name, data := range cc.DB {
+		if data.Active {
+			workers = append(workers, map[string]interface{}{
+				"name":   name,
+				"status": data.Status,
+				"tags":   data.Tags,
+				"usage":  data.Usage,
+			})
+		}
+	}
+
+	return helpers.ReturnJSONMap(c, http.StatusOK, map[string]interface{}{
 		"message": "Hi " + claims["user"].(string) + ", the Distributed Parallel Image Processing System is up and running!",
 		"time":    time.Now().String(),
+		"workers": workers,
 	})
 }
 
@@ -32,23 +47,27 @@ func StatusWorkerResponse(c echo.Context) error {
 	fmt.Println("[ACCESS] New connection to:\t/status/:worker")
 	user := c.Get("user").(*jwt.Token)
 	token := user.Raw
-
 	valid := helpers.IsTokenActive(token)
 
 	if !valid {
 		return helpers.ReturnJSON(c, http.StatusConflict, "Token is invalid or revoked")
 	}
 
-	cc := c.(helpers.CustomContext)
+	cc := c.(*helpers.CustomContext)
 
 	worker := c.Param("worker")
 	if workerData, ok := cc.DB[worker]; ok {
-		return helpers.ReturnJSONMap(cc.Context, http.StatusOK, map[string]string{
-			"name":   workerData.Name,
-			"tags":   workerData.Tags,
-			"status": workerData.Status,
-			"usage":  strconv.Itoa(workerData.Usage),
-		})
+		if workerData.Active {
+			return helpers.ReturnJSONMap(cc.Context, http.StatusOK, map[string]interface{}{
+				"name":   workerData.Name,
+				"tags":   workerData.Tags,
+				"status": workerData.Status,
+				"usage":  strconv.Itoa(workerData.Usage),
+			})
+		} else {
+			return helpers.ReturnJSON(c, http.StatusConflict, "Worker is not active anymore!")
+		}
+
 	}
 	return helpers.ReturnJSON(c, http.StatusNotFound, "Worker wasn't found!")
 }

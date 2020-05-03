@@ -9,6 +9,7 @@ require (
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/sonyarouje/simdb v0.0.0-20181202125413-c2488dfc374a
+	github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518 // indirect
 	github.com/valyala/fasttemplate v1.1.0 // indirect
 	go.mongodb.org/mongo-driver v1.3.2
 	go.nanomsg.org/mangos v2.0.0+incompatible

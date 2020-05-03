@@ -7,4 +7,5 @@ type Worker struct {
 	Usage  int    `json:"usage"`
 	URL    string `json:"url"`
 	Active bool   `json:"active"`
+	Port   int    `json:"port"`
 }

@@ -29,8 +29,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-//Ping Pong
-type PingRequest struct {
+type JobRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -38,8 +37,8 @@ type PingRequest struct {
 	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
 }
 
-func (x *PingRequest) Reset() {
-	*x = PingRequest{}
+func (x *JobRequest) Reset() {
+	*x = JobRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_controller_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -47,13 +46,13 @@ func (x *PingRequest) Reset() {
 	}
 }
 
-func (x *PingRequest) String() string {
+func (x *JobRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PingRequest) ProtoMessage() {}
+func (*JobRequest) ProtoMessage() {}
 
-func (x *PingRequest) ProtoReflect() protoreflect.Message {
+func (x *JobRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_controller_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -65,19 +64,19 @@ func (x *PingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PingRequest.ProtoReflect.Descriptor instead.
-func (*PingRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use JobRequest.ProtoReflect.Descriptor instead.
+func (*JobRequest) Descriptor() ([]byte, []int) {
 	return file_controller_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *PingRequest) GetMsg() string {
+func (x *JobRequest) GetMsg() string {
 	if x != nil {
 		return x.Msg
 	}
 	return ""
 }
 
-type PongReply struct {
+type JobReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -85,8 +84,8 @@ type PongReply struct {
 	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
 }
 
-func (x *PongReply) Reset() {
-	*x = PongReply{}
+func (x *JobReply) Reset() {
+	*x = JobReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_controller_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -94,13 +93,13 @@ func (x *PongReply) Reset() {
 	}
 }
 
-func (x *PongReply) String() string {
+func (x *JobReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PongReply) ProtoMessage() {}
+func (*JobReply) ProtoMessage() {}
 
-func (x *PongReply) ProtoReflect() protoreflect.Message {
+func (x *JobReply) ProtoReflect() protoreflect.Message {
 	mi := &file_controller_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -112,467 +111,34 @@ func (x *PongReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PongReply.ProtoReflect.Descriptor instead.
-func (*PongReply) Descriptor() ([]byte, []int) {
+// Deprecated: Use JobReply.ProtoReflect.Descriptor instead.
+func (*JobReply) Descriptor() ([]byte, []int) {
 	return file_controller_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PongReply) GetMsg() string {
+func (x *JobReply) GetMsg() string {
 	if x != nil {
 		return x.Msg
 	}
 	return ""
-}
-
-type DetailsRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
-}
-
-func (x *DetailsRequest) Reset() {
-	*x = DetailsRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_controller_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *DetailsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DetailsRequest) ProtoMessage() {}
-
-func (x *DetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_controller_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DetailsRequest.ProtoReflect.Descriptor instead.
-func (*DetailsRequest) Descriptor() ([]byte, []int) {
-	return file_controller_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *DetailsRequest) GetMsg() string {
-	if x != nil {
-		return x.Msg
-	}
-	return ""
-}
-
-type WorkerNameRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
-}
-
-func (x *WorkerNameRequest) Reset() {
-	*x = WorkerNameRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_controller_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *WorkerNameRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*WorkerNameRequest) ProtoMessage() {}
-
-func (x *WorkerNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_controller_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use WorkerNameRequest.ProtoReflect.Descriptor instead.
-func (*WorkerNameRequest) Descriptor() ([]byte, []int) {
-	return file_controller_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *WorkerNameRequest) GetMsg() string {
-	if x != nil {
-		return x.Msg
-	}
-	return ""
-}
-
-type StatusRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
-}
-
-func (x *StatusRequest) Reset() {
-	*x = StatusRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_controller_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *StatusRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StatusRequest) ProtoMessage() {}
-
-func (x *StatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_controller_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StatusRequest.ProtoReflect.Descriptor instead.
-func (*StatusRequest) Descriptor() ([]byte, []int) {
-	return file_controller_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *StatusRequest) GetMsg() string {
-	if x != nil {
-		return x.Msg
-	}
-	return ""
-}
-
-type WorkloadRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
-}
-
-func (x *WorkloadRequest) Reset() {
-	*x = WorkloadRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_controller_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *WorkloadRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*WorkloadRequest) ProtoMessage() {}
-
-func (x *WorkloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_controller_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use WorkloadRequest.ProtoReflect.Descriptor instead.
-func (*WorkloadRequest) Descriptor() ([]byte, []int) {
-	return file_controller_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *WorkloadRequest) GetMsg() string {
-	if x != nil {
-		return x.Msg
-	}
-	return ""
-}
-
-type DetailsReply struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Workername string `protobuf:"bytes,1,opt,name=workername,proto3" json:"workername,omitempty"`
-	Status     string `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Workload   int64  `protobuf:"varint,3,opt,name=workload,proto3" json:"workload,omitempty"`
-}
-
-func (x *DetailsReply) Reset() {
-	*x = DetailsReply{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_controller_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *DetailsReply) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DetailsReply) ProtoMessage() {}
-
-func (x *DetailsReply) ProtoReflect() protoreflect.Message {
-	mi := &file_controller_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DetailsReply.ProtoReflect.Descriptor instead.
-func (*DetailsReply) Descriptor() ([]byte, []int) {
-	return file_controller_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *DetailsReply) GetWorkername() string {
-	if x != nil {
-		return x.Workername
-	}
-	return ""
-}
-
-func (x *DetailsReply) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *DetailsReply) GetWorkload() int64 {
-	if x != nil {
-		return x.Workload
-	}
-	return 0
-}
-
-type WorkerNameReply struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Workername string `protobuf:"bytes,1,opt,name=workername,proto3" json:"workername,omitempty"`
-}
-
-func (x *WorkerNameReply) Reset() {
-	*x = WorkerNameReply{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_controller_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *WorkerNameReply) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*WorkerNameReply) ProtoMessage() {}
-
-func (x *WorkerNameReply) ProtoReflect() protoreflect.Message {
-	mi := &file_controller_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use WorkerNameReply.ProtoReflect.Descriptor instead.
-func (*WorkerNameReply) Descriptor() ([]byte, []int) {
-	return file_controller_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *WorkerNameReply) GetWorkername() string {
-	if x != nil {
-		return x.Workername
-	}
-	return ""
-}
-
-type StatusReply struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-}
-
-func (x *StatusReply) Reset() {
-	*x = StatusReply{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_controller_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *StatusReply) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StatusReply) ProtoMessage() {}
-
-func (x *StatusReply) ProtoReflect() protoreflect.Message {
-	mi := &file_controller_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StatusReply.ProtoReflect.Descriptor instead.
-func (*StatusReply) Descriptor() ([]byte, []int) {
-	return file_controller_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *StatusReply) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-type WorkloadReply struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Workload int64 `protobuf:"varint,1,opt,name=workload,proto3" json:"workload,omitempty"`
-}
-
-func (x *WorkloadReply) Reset() {
-	*x = WorkloadReply{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_controller_proto_msgTypes[9]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *WorkloadReply) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*WorkloadReply) ProtoMessage() {}
-
-func (x *WorkloadReply) ProtoReflect() protoreflect.Message {
-	mi := &file_controller_proto_msgTypes[9]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use WorkloadReply.ProtoReflect.Descriptor instead.
-func (*WorkloadReply) Descriptor() ([]byte, []int) {
-	return file_controller_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *WorkloadReply) GetWorkload() int64 {
-	if x != nil {
-		return x.Workload
-	}
-	return 0
 }
 
 var File_controller_proto protoreflect.FileDescriptor
 
 var file_controller_proto_rawDesc = []byte{
 	0x0a, 0x10, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x12, 0x05, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1f, 0x0a, 0x0b, 0x50, 0x69, 0x6e,
-	0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x1d, 0x0a, 0x09, 0x50, 0x6f,
-	0x6e, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x22, 0x0a, 0x0e, 0x44, 0x65, 0x74,
-	0x61, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d,
-	0x73, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x25, 0x0a,
-	0x11, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x03, 0x6d, 0x73, 0x67, 0x22, 0x21, 0x0a, 0x0d, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x23, 0x0a, 0x0f, 0x57, 0x6f, 0x72, 0x6b, 0x6c,
-	0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73,
-	0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x62, 0x0a, 0x0c,
-	0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x1e, 0x0a, 0x0a,
-	0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x0a, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06,
-	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x77, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x77, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64,
-	0x22, 0x31, 0x0a, 0x0f, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65,
-	0x70, 0x6c, 0x79, 0x12, 0x1e, 0x0a, 0x0a, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x6e,
-	0x61, 0x6d, 0x65, 0x22, 0x25, 0x0a, 0x0b, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x70,
-	0x6c, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x2b, 0x0a, 0x0d, 0x57, 0x6f,
-	0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x1a, 0x0a, 0x08, 0x77,
-	0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x77,
-	0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x32, 0xd1, 0x02, 0x0a, 0x0a, 0x43, 0x6f, 0x6e, 0x74,
-	0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x3f, 0x0a, 0x0f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x15, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73,
-	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x3c, 0x0a, 0x0e, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65,
-	0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x42, 0x0a, 0x10, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x57, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x6c, 0x6f,
-	0x61, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x48, 0x0a, 0x12, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12,
-	0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x4e, 0x61,
-	0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x70, 0x6c,
-	0x79, 0x22, 0x00, 0x12, 0x36, 0x0a, 0x0c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x50,
-	0x6f, 0x6e, 0x67, 0x12, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x69, 0x6e, 0x67,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
-	0x50, 0x6f, 0x6e, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x1f, 0x0a, 0x13, 0x69,
-	0x6f, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x67, 0x64, 0x69, 0x70, 0x2e, 0x77, 0x6f, 0x72, 0x6b,
-	0x65, 0x72, 0x42, 0x06, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x50, 0x01, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x6f, 0x12, 0x05, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1e, 0x0a, 0x0a, 0x4a, 0x6f, 0x62,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x1c, 0x0a, 0x08, 0x4a, 0x6f, 0x62,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x32, 0x3f, 0x0a, 0x0a, 0x43, 0x6f, 0x6e, 0x74, 0x72,
+	0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x31, 0x0a, 0x09, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4a,
+	0x6f, 0x62, 0x12, 0x11, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4a, 0x6f, 0x62, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4a, 0x6f,
+	0x62, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x1f, 0x0a, 0x13, 0x69, 0x6f, 0x2e, 0x67,
+	0x72, 0x70, 0x63, 0x2e, 0x67, 0x64, 0x69, 0x70, 0x2e, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x42,
+	0x06, 0x77, 0x6f, 0x72, 0x6b, 0x65, 0x72, 0x50, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -587,32 +153,16 @@ func file_controller_proto_rawDescGZIP() []byte {
 	return file_controller_proto_rawDescData
 }
 
-var file_controller_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_controller_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_controller_proto_goTypes = []interface{}{
-	(*PingRequest)(nil),       // 0: proto.PingRequest
-	(*PongReply)(nil),         // 1: proto.PongReply
-	(*DetailsRequest)(nil),    // 2: proto.DetailsRequest
-	(*WorkerNameRequest)(nil), // 3: proto.WorkerNameRequest
-	(*StatusRequest)(nil),     // 4: proto.StatusRequest
-	(*WorkloadRequest)(nil),   // 5: proto.WorkloadRequest
-	(*DetailsReply)(nil),      // 6: proto.DetailsReply
-	(*WorkerNameReply)(nil),   // 7: proto.WorkerNameReply
-	(*StatusReply)(nil),       // 8: proto.StatusReply
-	(*WorkloadReply)(nil),     // 9: proto.WorkloadReply
+	(*JobRequest)(nil), // 0: proto.JobRequest
+	(*JobReply)(nil),   // 1: proto.JobReply
 }
 var file_controller_proto_depIdxs = []int32{
-	2, // 0: proto.Controller.ResponseDetails:input_type -> proto.DetailsRequest
-	4, // 1: proto.Controller.ResponseStatus:input_type -> proto.StatusRequest
-	5, // 2: proto.Controller.ResponseWorkload:input_type -> proto.WorkloadRequest
-	3, // 3: proto.Controller.ResponseWorkerName:input_type -> proto.WorkerNameRequest
-	0, // 4: proto.Controller.ResponsePong:input_type -> proto.PingRequest
-	6, // 5: proto.Controller.ResponseDetails:output_type -> proto.DetailsReply
-	8, // 6: proto.Controller.ResponseStatus:output_type -> proto.StatusReply
-	9, // 7: proto.Controller.ResponseWorkload:output_type -> proto.WorkloadReply
-	7, // 8: proto.Controller.ResponseWorkerName:output_type -> proto.WorkerNameReply
-	1, // 9: proto.Controller.ResponsePong:output_type -> proto.PongReply
-	5, // [5:10] is the sub-list for method output_type
-	0, // [0:5] is the sub-list for method input_type
+	0, // 0: proto.Controller.CreateJob:input_type -> proto.JobRequest
+	1, // 1: proto.Controller.CreateJob:output_type -> proto.JobReply
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -625,7 +175,7 @@ func file_controller_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_controller_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PingRequest); i {
+			switch v := v.(*JobRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -637,103 +187,7 @@ func file_controller_proto_init() {
 			}
 		}
 		file_controller_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PongReply); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_controller_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DetailsRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_controller_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WorkerNameRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_controller_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatusRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_controller_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WorkloadRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_controller_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DetailsReply); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_controller_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WorkerNameReply); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_controller_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatusReply); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_controller_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WorkloadReply); i {
+			switch v := v.(*JobReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -751,7 +205,7 @@ func file_controller_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_controller_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -777,11 +231,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ControllerClient interface {
-	ResponseDetails(ctx context.Context, in *DetailsRequest, opts ...grpc.CallOption) (*DetailsReply, error)
-	ResponseStatus(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusReply, error)
-	ResponseWorkload(ctx context.Context, in *WorkloadRequest, opts ...grpc.CallOption) (*WorkloadReply, error)
-	ResponseWorkerName(ctx context.Context, in *WorkerNameRequest, opts ...grpc.CallOption) (*WorkerNameReply, error)
-	ResponsePong(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PongReply, error)
+	CreateJob(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*JobReply, error)
 }
 
 type controllerClient struct {
@@ -792,45 +242,9 @@ func NewControllerClient(cc grpc.ClientConnInterface) ControllerClient {
 	return &controllerClient{cc}
 }
 
-func (c *controllerClient) ResponseDetails(ctx context.Context, in *DetailsRequest, opts ...grpc.CallOption) (*DetailsReply, error) {
-	out := new(DetailsReply)
-	err := c.cc.Invoke(ctx, "/proto.Controller/ResponseDetails", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *controllerClient) ResponseStatus(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusReply, error) {
-	out := new(StatusReply)
-	err := c.cc.Invoke(ctx, "/proto.Controller/ResponseStatus", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *controllerClient) ResponseWorkload(ctx context.Context, in *WorkloadRequest, opts ...grpc.CallOption) (*WorkloadReply, error) {
-	out := new(WorkloadReply)
-	err := c.cc.Invoke(ctx, "/proto.Controller/ResponseWorkload", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *controllerClient) ResponseWorkerName(ctx context.Context, in *WorkerNameRequest, opts ...grpc.CallOption) (*WorkerNameReply, error) {
-	out := new(WorkerNameReply)
-	err := c.cc.Invoke(ctx, "/proto.Controller/ResponseWorkerName", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *controllerClient) ResponsePong(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PongReply, error) {
-	out := new(PongReply)
-	err := c.cc.Invoke(ctx, "/proto.Controller/ResponsePong", in, out, opts...)
+func (c *controllerClient) CreateJob(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*JobReply, error) {
+	out := new(JobReply)
+	err := c.cc.Invoke(ctx, "/proto.Controller/CreateJob", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -839,123 +253,35 @@ func (c *controllerClient) ResponsePong(ctx context.Context, in *PingRequest, op
 
 // ControllerServer is the server API for Controller service.
 type ControllerServer interface {
-	ResponseDetails(context.Context, *DetailsRequest) (*DetailsReply, error)
-	ResponseStatus(context.Context, *StatusRequest) (*StatusReply, error)
-	ResponseWorkload(context.Context, *WorkloadRequest) (*WorkloadReply, error)
-	ResponseWorkerName(context.Context, *WorkerNameRequest) (*WorkerNameReply, error)
-	ResponsePong(context.Context, *PingRequest) (*PongReply, error)
+	CreateJob(context.Context, *JobRequest) (*JobReply, error)
 }
 
 // UnimplementedControllerServer can be embedded to have forward compatible implementations.
 type UnimplementedControllerServer struct {
 }
 
-func (*UnimplementedControllerServer) ResponseDetails(context.Context, *DetailsRequest) (*DetailsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResponseDetails not implemented")
-}
-func (*UnimplementedControllerServer) ResponseStatus(context.Context, *StatusRequest) (*StatusReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResponseStatus not implemented")
-}
-func (*UnimplementedControllerServer) ResponseWorkload(context.Context, *WorkloadRequest) (*WorkloadReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResponseWorkload not implemented")
-}
-func (*UnimplementedControllerServer) ResponseWorkerName(context.Context, *WorkerNameRequest) (*WorkerNameReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResponseWorkerName not implemented")
-}
-func (*UnimplementedControllerServer) ResponsePong(context.Context, *PingRequest) (*PongReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResponsePong not implemented")
+func (*UnimplementedControllerServer) CreateJob(context.Context, *JobRequest) (*JobReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateJob not implemented")
 }
 
 func RegisterControllerServer(s *grpc.Server, srv ControllerServer) {
 	s.RegisterService(&_Controller_serviceDesc, srv)
 }
 
-func _Controller_ResponseDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DetailsRequest)
+func _Controller_CreateJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JobRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ControllerServer).ResponseDetails(ctx, in)
+		return srv.(ControllerServer).CreateJob(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.Controller/ResponseDetails",
+		FullMethod: "/proto.Controller/CreateJob",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ControllerServer).ResponseDetails(ctx, req.(*DetailsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Controller_ResponseStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StatusRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ControllerServer).ResponseStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.Controller/ResponseStatus",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ControllerServer).ResponseStatus(ctx, req.(*StatusRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Controller_ResponseWorkload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WorkloadRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ControllerServer).ResponseWorkload(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.Controller/ResponseWorkload",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ControllerServer).ResponseWorkload(ctx, req.(*WorkloadRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Controller_ResponseWorkerName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WorkerNameRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ControllerServer).ResponseWorkerName(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.Controller/ResponseWorkerName",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ControllerServer).ResponseWorkerName(ctx, req.(*WorkerNameRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Controller_ResponsePong_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ControllerServer).ResponsePong(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.Controller/ResponsePong",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ControllerServer).ResponsePong(ctx, req.(*PingRequest))
+		return srv.(ControllerServer).CreateJob(ctx, req.(*JobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -965,24 +291,8 @@ var _Controller_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*ControllerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ResponseDetails",
-			Handler:    _Controller_ResponseDetails_Handler,
-		},
-		{
-			MethodName: "ResponseStatus",
-			Handler:    _Controller_ResponseStatus_Handler,
-		},
-		{
-			MethodName: "ResponseWorkload",
-			Handler:    _Controller_ResponseWorkload_Handler,
-		},
-		{
-			MethodName: "ResponseWorkerName",
-			Handler:    _Controller_ResponseWorkerName_Handler,
-		},
-		{
-			MethodName: "ResponsePong",
-			Handler:    _Controller_ResponsePong_Handler,
+			MethodName: "CreateJob",
+			Handler:    _Controller_CreateJob_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
