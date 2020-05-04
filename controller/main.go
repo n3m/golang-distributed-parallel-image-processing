@@ -37,8 +37,6 @@ func Start(controllerAddress string, currentWorkers map[string]models.Worker, db
 		die(errorMessage+"SetOption(): %+v", err.Error())
 	}
 	for {
-		time.Sleep(time.Millisecond)
-
 		err = socket.Send([]byte("Is anyone there?"))
 		if err != nil {
 			die(errorMessage+"The process for looking for workers failed! -> %+v", err.Error())

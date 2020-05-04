@@ -8,6 +8,7 @@ import (
 	"net"
 	"os"
 	"strconv"
+	"time"
 
 	pb "golang-distributed-parallel-image-processing/proto"
 
@@ -61,8 +62,9 @@ func (s *server) CreateJob(ctx context.Context, in *pb.JobRequest) (*pb.JobReply
 		/*Task*/
 		log.Printf("[Worker] %+v: I've been called to do a test", workerName)
 		usage++
-		status = "Testing"
-		response := &pb.JobReply{Msg: "Ping Pong!"}
+		status = "Running"
+		time.Sleep(time.Second * 5)
+		response := &pb.JobReply{Msg: workerName}
 		usage--
 		status = "Idle"
 		return response, nil
@@ -72,7 +74,7 @@ func (s *server) CreateJob(ctx context.Context, in *pb.JobRequest) (*pb.JobReply
 		/*Task*/
 		log.Printf("[Worker] %+v: I've been called by an RPC, but no task was received", workerName)
 		usage++
-		status = "Idle"
+		status = "Running"
 		response := &pb.JobReply{Msg: "RPC not valid"}
 		usage--
 		status = "Idle"
@@ -94,13 +96,12 @@ func joinCluster() {
 		die(errorMessage + err.Error())
 	}
 	for {
-		workerData := createDataString()
 		_, err = socket.Recv()
 		if err != nil {
 			die(errorMessage + "Error while Recv() ->" + err.Error())
 		}
 
-		err = socket.Send([]byte(workerData))
+		err = socket.Send([]byte(createDataString()))
 		if err != nil {
 			die(errorMessage + err.Error())
 		}

@@ -5,11 +5,12 @@ import (
 	"golang-distributed-parallel-image-processing/api/helpers"
 	"golang-distributed-parallel-image-processing/scheduler"
 	"net/http"
-	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 )
+
+var NoOfTests int = 0
 
 func WorkloadsResponse(c echo.Context) error {
 	fmt.Println("[ACCESS] New connection to:\t/workloads/test")
@@ -29,10 +30,16 @@ func WorkloadsResponse(c echo.Context) error {
 	}
 
 	/*TEST*/
-	for e := 0; e < 500; e++ {
-		time.Sleep(time.Second / 10)
+
+	NoOfTests++
+	for e := 0; e < 20; e++ {
 		cc.JOBS <- scheduler.Job{RPCName: "test"}
 	}
 
-	return helpers.ReturnJSON(c, http.StatusOK, "Workloads Test has been completed. A total of 500 tests task were created and completed successfully.")
+	return helpers.ReturnJSONMap(c, http.StatusOK, map[string]interface{}{
+		"Workload": "test",
+		"Job ID":   NoOfTests,
+		"Status":   "Completed",
+		"Result":   "Done!",
+	})
 }

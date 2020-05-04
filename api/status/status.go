@@ -1,10 +1,10 @@
 package status
 
 import (
-	"encoding/json"
 	"fmt"
 	"golang-distributed-parallel-image-processing/api/helpers"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -27,24 +27,24 @@ func StatusResponse(c echo.Context) error {
 	cc := c.(*helpers.CustomContext)
 	for _, data := range cc.DB {
 		if data.Active {
-			var jsonData map[string]interface{}
-			byteData, err := json.Marshal(data)
-			if err != nil {
-				return helpers.ReturnJSON(c, http.StatusConflict, "Error Marshaling data")
-			}
-			err = json.Unmarshal(byteData, &jsonData)
-			if err != nil {
-				return helpers.ReturnJSON(c, http.StatusConflict, "Error Unmarshaling data")
-			}
-			workers = append(workers, jsonData)
-			// workers = append(workers, map[string]interface{}{
-			// 	"name":     name,
-			// 	"status":   data.Status,
-			// 	"tags":     data.Tags,
-			// 	"usage":    data.Usage,
-			// 	"port":     data.Port,
-			// 	"jobsDone": data.JobsDone,
-			// })
+			// var jsonData map[string]interface{}
+			// byteData, err := json.Marshal(data)
+			// if err != nil {
+			// 	return helpers.ReturnJSON(c, http.StatusConflict, "Error Marshaling data")
+			// }
+			// err = json.Unmarshal(byteData, &jsonData)
+			// if err != nil {
+			// 	return helpers.ReturnJSON(c, http.StatusConflict, "Error Unmarshaling data")
+			// }
+			// workers = append(workers, jsonData)
+			workers = append(workers, map[string]interface{}{
+				"Worker":    data.Name,
+				"Tags":      data.Tags,
+				"Status":    data.Status,
+				"Usage":     strconv.Itoa(data.Usage) + "%",
+				"Jobs Done": data.JobsDone,
+				"Port":      data.Port,
+			})
 		}
 	}
 
@@ -70,16 +70,12 @@ func StatusWorkerResponse(c echo.Context) error {
 	worker := c.Param("worker")
 	if workerData, ok := cc.DB[worker]; ok {
 		if workerData.Active {
-			var jsonData map[string]interface{}
-			byteData, err := json.Marshal(workerData)
-			if err != nil {
-				return helpers.ReturnJSON(c, http.StatusConflict, "Error Marshaling data")
-			}
-			err = json.Unmarshal(byteData, &jsonData)
-			if err != nil {
-				return helpers.ReturnJSON(c, http.StatusConflict, "Error Unmarshaling data")
-			}
-			return helpers.ReturnJSONMap(cc.Context, http.StatusOK, jsonData)
+			return helpers.ReturnJSONMap(cc.Context, http.StatusOK, map[string]interface{}{
+				"Worker": workerData.Name,
+				"Tags":   workerData.Tags,
+				"Status": workerData.Status,
+				"Usage":  strconv.Itoa(workerData.Usage) + "%",
+			})
 		} else {
 			return helpers.ReturnJSON(c, http.StatusConflict, "Worker is not active anymore!")
 		}
