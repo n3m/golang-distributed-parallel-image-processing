@@ -45,7 +45,7 @@ func LoadModules() []*Module {
 			Function: login.LoginResponse,
 		},
 		{
-			Method:     "POST",
+			Method:     "GET",
 			Path:       "/logout",
 			Function:   logout.LogoutResponse,
 			Middleware: &IsLoggedIn,

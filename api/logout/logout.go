@@ -16,7 +16,7 @@ func LogoutResponse(c echo.Context) error {
 	if _, ok := helpers.ActiveTokens[user.Raw]; ok {
 		fmt.Println("\t[OPERATION] Revoked token")
 		delete(helpers.ActiveTokens, user.Raw)
-		return c.JSON(http.StatusOK, &map[string]string{"message": "the provided token has been revoked"})
+		return c.JSON(http.StatusOK, &map[string]string{"message": "The provided token has been revoked"})
 	}
 	return c.JSON(http.StatusOK, &map[string]string{"message": "Your token is invalid"})
 }
