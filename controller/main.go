@@ -68,5 +68,6 @@ func ParseResponse(msg string) models.Worker {
 	jobsDone, _ := strconv.Atoi(data[5])
 	worker.JobsDone = jobsDone
 	worker.Active = true
+	worker.URL = "localhost:" + data[4]
 	return worker
 }

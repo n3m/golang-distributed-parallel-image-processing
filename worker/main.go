@@ -146,6 +146,5 @@ func main() {
 
 func createDataString() string {
 	data := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags + "|" + strconv.Itoa(port) + "|" + strconv.Itoa(jobsDone)
-	log.Printf("%+v", data)
 	return data
 }
