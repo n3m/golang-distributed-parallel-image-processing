@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.gdip.worker";
+option java_outer_classname = "worker";
+
+package proto;
+
+service Controller {
+    rpc CreateJob(JobRequest) returns (JobReply) {}
+}
+
+message JobRequest {
+    string msg = 1;
+}
+/*Replies*/
+
+message JobReply {
+    string msg = 1;
+}
+
+
