@@ -1,19 +1,33 @@
 # Distributed Parallel Image Processing Application
 
 ## Language
+
 - Golang
 
 ## Contributors
+
 - Alan Enrique Maldonado Navarro
 - Guillermo Gonzalez Mena
 
 ### Dependencies Commands:
+
 - go get -u github.com/labstack/echo/...
 - go get github.com/dgrijalva/jwt-go
 
-curl -X POST -d "username=admin&password=password" http://localhost:8080/login
-curl -X POST -H "Authorization: Bearer <ACCESS_TOKEN>" localhost:8080/logout
-curl -H "Authorization: Bearer <ACCESS_TOKEN>" localhost:8080/status
-curl -F "data=@image.jpg" -H "Authorization: Bearer <ACCESS_TOKEN>" http://localhost:8080/upload
+## Commands
 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODU0NTE2OTEsInVzZXIiOiJhZG1pbiJ9.wGtG-F58W2Gq_Zkk8XouPrN27xClGhbEa8kNwMALv3s
+- ./worker --controller tcp://localhost:40899 --worker-name Ciry --tags gpu,nvidia, assets, static
+
+- ./worker --controller tcp://localhost:40899 --worker-name Miranda --tags gpu,nvidia, assets, static
+
+- curl -u admin:password http://localhost:8080/login
+
+- curl -F "data=boom.png" -H "Authorization: Bearer <token>" http://localhost:8080/upload
+
+- curl -H "Authorization: Bearer <token>" http://localhost:8080/status
+
+- curl -H "Authorization: Bearer <token>" http://localhost:8080/status/<Workername>
+
+- curl -H "Authorization: Bearer <token>" http://localhost:8080/workloads/test
+
+- curl -H "Authorization: Bearer <token>" http://localhost:8080/logout
