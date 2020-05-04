@@ -28,9 +28,9 @@ func WorkloadsResponse(c echo.Context) error {
 	}
 
 	/*TEST*/
-	for e := 0; e < 200; e++ {
+	for e := 0; e < 500; e++ {
 		cc.JOBS <- scheduler.Job{RPCName: "test"}
 	}
 
-	return helpers.ReturnJSON(c, http.StatusOK, "Testing workers with 200 tasks!")
+	return helpers.ReturnJSON(c, http.StatusOK, "Testing workers with 500 test tasks!")
 }

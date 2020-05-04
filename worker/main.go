@@ -35,6 +35,7 @@ var (
 	usage             = 0
 	status            = "Idle"
 	port              = 0
+	jobsDone          = 0
 )
 
 /* System Functions */
@@ -55,6 +56,9 @@ func init() {
 func (s *server) CreateJob(ctx context.Context, in *pb.JobRequest) (*pb.JobReply, error) {
 	switch in.Msg {
 	case "test":
+		/*Log*/
+		jobsDone++
+		/*Task*/
 		log.Printf("[Worker] %+v: I've been called to do a test", workerName)
 		usage++
 		status = "Testing"
@@ -63,6 +67,9 @@ func (s *server) CreateJob(ctx context.Context, in *pb.JobRequest) (*pb.JobReply
 		status = "Idle"
 		return response, nil
 	default:
+		/*Log*/
+		jobsDone++
+		/*Task*/
 		log.Printf("[Worker] %+v: I've been called by an RPC, but no task was received", workerName)
 		usage++
 		status = "Idle"
@@ -138,6 +145,7 @@ func main() {
 }
 
 func createDataString() string {
-	data := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags + "|" + strconv.Itoa(port)
+	data := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags + "|" + strconv.Itoa(port) + "|" + strconv.Itoa(jobsDone)
+	log.Printf("%+v", data)
 	return data
 }

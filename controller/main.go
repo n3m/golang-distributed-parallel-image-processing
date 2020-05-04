@@ -40,7 +40,7 @@ func Start(controllerAddress string, currentWorkers map[string]models.Worker, db
 	seconds := 0
 
 	for {
-		time.Sleep(time.Second)
+		time.Sleep(time.Second / 2)
 		if seconds == 9 {
 			log.Printf("Online Workers: ")
 			for w, val := range currentWorkers {
@@ -77,10 +77,12 @@ func ParseResponse(msg string) models.Worker {
 	worker.Name = data[0]
 	worker.Status = data[1]
 	usage, _ := strconv.Atoi(data[2])
+	worker.Usage = usage
 	worker.Tags = data[3]
 	port, _ := strconv.Atoi(data[4])
 	worker.Port = port
-	worker.Usage = usage
+	jobsDone, _ := strconv.Atoi(data[5])
+	worker.JobsDone = jobsDone
 	worker.Active = true
 	return worker
 }
