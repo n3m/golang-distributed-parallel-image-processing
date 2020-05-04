@@ -45,7 +45,7 @@ func Start(controllerAddress string, currentWorkers map[string]models.Worker, db
 			log.Printf("Online Workers: ")
 			for w, val := range currentWorkers {
 				if val.Active {
-					log.Printf("\t- %+v: -> Status: %+v", w, val.Status)
+					log.Printf("\t- %+v: -> Status: %+v -> Port: %+v", w, val.Status, val.Port)
 				}
 			}
 		}
@@ -77,7 +77,8 @@ func ParseResponse(msg string) models.Worker {
 	worker.Name = data[0]
 	worker.Status = data[1]
 	usage, _ := strconv.Atoi(data[2])
-	port, _ := strconv.Atoi(data[3])
+	worker.Tags = data[3]
+	port, _ := strconv.Atoi(data[4])
 	worker.Port = port
 	worker.Usage = usage
 	worker.Active = true

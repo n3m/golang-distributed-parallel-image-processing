@@ -55,15 +55,27 @@ func init() {
 func (s *server) CreateJob(ctx context.Context, in *pb.JobRequest) (*pb.JobReply, error) {
 	switch in.Msg {
 	case "test":
-		return &pb.JobReply{Msg: "Ping Pong!"}, nil
+		log.Printf("[Worker] %+v: I've been called to do a test", workerName)
+		usage++
+		status = "Testing"
+		response := &pb.JobReply{Msg: "Ping Pong!"}
+		usage--
+		status = "Idle"
+		return response, nil
 	default:
-		return &pb.JobReply{Msg: "RPC not valid"}, nil
+		log.Printf("[Worker] %+v: I've been called by an RPC, but no task was received", workerName)
+		usage++
+		status = "Idle"
+		response := &pb.JobReply{Msg: "RPC not valid"}
+		usage--
+		status = "Idle"
+		return response, nil
 	}
 }
 
 func joinCluster() {
 	errorMessage := "[ERR] Worker: (" + workerName + ") -> "
-	workerData := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags + "|" + strconv.Itoa(port)
+
 	var err error
 	socket, err := respondent.NewSocket()
 	if err != nil {
@@ -74,19 +86,11 @@ func joinCluster() {
 	if err != nil {
 		die(errorMessage + err.Error())
 	}
-	seconds := 0
 	for {
+		workerData := createDataString()
 		_, err = socket.Recv()
 		if err != nil {
 			die(errorMessage + "Error while Recv() ->" + err.Error())
-		}
-		if seconds == 9 {
-			log.Printf("[Worker] %v: I've been pinged! ", workerName)
-		}
-		if seconds < 10 {
-			seconds++
-		} else {
-			seconds = 0
 		}
 
 		err = socket.Send([]byte(workerData))
@@ -114,12 +118,13 @@ func getAvailablePort() int {
 func main() {
 	flag.Parse()
 
+	rpcPort := getAvailablePort()
+	port = rpcPort
+
 	// Subscribe to Controller
 	go joinCluster()
 
 	// Setup Worker RPC Server
-	rpcPort := getAvailablePort()
-	port = rpcPort
 	log.Printf("[W] "+workerName+": Starting RPC Service on localhost:%v", rpcPort)
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", rpcPort))
 	if err != nil {
@@ -130,4 +135,9 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+}
+
+func createDataString() string {
+	data := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags + "|" + strconv.Itoa(port)
+	return data
 }

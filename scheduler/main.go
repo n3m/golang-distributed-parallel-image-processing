@@ -33,12 +33,11 @@ func schedule(job Job, DB map[string]models.Worker) {
 	for _, data := range DB {
 		if data.Usage < lowestUsage {
 			lowestPort = data.Port
+			lowestUsage = data.Usage
 		}
 	}
 
-	log.Printf("Lowest Worker usage was: %+v and worker Port is: %+v", lowestUsage, lowestPort)
 	if lowestPort == 0 {
-		log.Printf("Lowest port turned 0")
 		return
 	}
 
@@ -54,11 +53,12 @@ func schedule(job Job, DB map[string]models.Worker) {
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.CreateJob(ctx, &pb.JobRequest{Msg: job.RPCName})
+	_, err = c.CreateJob(ctx, &pb.JobRequest{Msg: job.RPCName})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	log.Printf("Scheduler: RPC respose from %s : %s", job.Address, r)
+
+	log.Printf("Scheduler -> Task: %+v was completed", job.RPCName)
 }
 
 func Start(jobs chan Job, DB map[string]models.Worker) error {
