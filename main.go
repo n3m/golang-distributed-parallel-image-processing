@@ -3,12 +3,45 @@ package main
 import (
 	"fmt"
 	"golang-distributed-parallel-image-processing/api"
+	"golang-distributed-parallel-image-processing/api/helpers"
+	"golang-distributed-parallel-image-processing/controller"
+	"golang-distributed-parallel-image-processing/models"
+	"golang-distributed-parallel-image-processing/scheduler"
+	"log"
 
 	"github.com/labstack/echo"
+	"github.com/sonyarouje/simdb/db"
 )
 
 func main() {
+	/* Setup Variables */
+	ControllerConnectionURL := "tcp://localhost:40899"
+	APIPort := ":8080"
+	DBName := "workers"
+	currentWorkers := map[string]models.Worker{}
+
+	/* DB Setup */
+	db, err := db.New(DBName)
+	if err != nil {
+		panic(err)
+	}
+
+	/* Scheduler Setup */
+	jobs := make(chan scheduler.Job)
+	go scheduler.Start(jobs, currentWorkers)
+
+	/* Controller Setup */
+	go controller.Start(ControllerConnectionURL, currentWorkers, db)
+	log.Printf("[SETUP] Controller Connection URL: %+v", ControllerConnectionURL)
+
+	/* API EndPoint Setup */
 	e := echo.New()
+	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			cc := &helpers.CustomContext{c, currentWorkers, jobs}
+			return next(cc)
+		}
+	})
 
 	modules := api.LoadModules()
 	fmt.Println("== URLs Loaded == ")
@@ -33,5 +66,6 @@ func main() {
 		}
 	}
 
-	e.Logger.Fatal(e.Start(":8080"))
+	go e.Logger.Fatal(e.Start(APIPort))
+
 }

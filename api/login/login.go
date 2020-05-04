@@ -11,9 +11,12 @@ import (
 )
 
 func LoginResponse(c echo.Context) error {
+
 	fmt.Println("[ACCESS] New connection to:\t/login")
-	username := c.FormValue("username")
-	password := c.FormValue("password")
+	username, password, isOk := c.(*helpers.CustomContext).Context.Request().BasicAuth()
+	if !isOk {
+		return helpers.ReturnJSON(c, http.StatusConflict, "[ERROR] Problem parsing Basic Auth")
+	}
 	if username == "admin" && password == "password" {
 		token := jwt.New(jwt.SigningMethodHS256)
 		claims := token.Claims.(jwt.MapClaims)
