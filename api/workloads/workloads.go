@@ -39,7 +39,7 @@ func WorkloadsResponse(c echo.Context) error {
 	return helpers.ReturnJSONMap(c, http.StatusOK, map[string]interface{}{
 		"Workload": "test",
 		"Job ID":   NoOfTests,
-		"Status":   "Completed",
+		"Status":   "Completed 20 tasks",
 		"Result":   "Done!",
 	})
 }
