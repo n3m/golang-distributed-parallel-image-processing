@@ -28,18 +28,22 @@ func schedule(job Job, DB map[string]models.Worker) {
 	defer cancel()
 
 	/* Load Distribution */
-	lowestUsage := 999
+	lowestUsage := 99999
+	// lowestData := models.Worker{}
 	lowestPort := 0
 	for _, data := range DB {
 		if data.Usage < lowestUsage {
 			lowestPort = data.Port
 			lowestUsage = data.Usage
+			// lowestData = data
 		}
 	}
 
 	if lowestPort == 0 {
 		return
 	}
+
+	// log.Printf("Lowest Usage: %+v from -> %v", lowestUsage, lowestData.Name)
 
 	job.Address = "localhost:" + strconv.Itoa(lowestPort)
 
@@ -58,7 +62,7 @@ func schedule(job Job, DB map[string]models.Worker) {
 		log.Fatalf("could not greet: %v", err)
 	}
 
-	log.Printf("Scheduler -> Task: %+v was completed", job.RPCName)
+	// log.Printf("Scheduler -> Task: %+v was completed", job.RPCName)
 }
 
 func Start(jobs chan Job, DB map[string]models.Worker) error {

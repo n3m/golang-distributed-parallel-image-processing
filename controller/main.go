@@ -3,7 +3,6 @@ package controller
 import (
 	"fmt"
 	"golang-distributed-parallel-image-processing/models"
-	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -37,23 +36,8 @@ func Start(controllerAddress string, currentWorkers map[string]models.Worker, db
 	if err != nil {
 		die(errorMessage+"SetOption(): %+v", err.Error())
 	}
-	seconds := 0
-
 	for {
-		time.Sleep(time.Second / 2)
-		if seconds == 9 {
-			log.Printf("Online Workers: ")
-			for w, val := range currentWorkers {
-				if val.Active {
-					log.Printf("\t- %+v: -> Status: %+v -> Port: %+v", w, val.Status, val.Port)
-				}
-			}
-		}
-		if seconds < 10 {
-			seconds += 1
-		} else {
-			seconds = 0
-		}
+		time.Sleep(time.Millisecond)
 
 		err = socket.Send([]byte("Is anyone there?"))
 		if err != nil {

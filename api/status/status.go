@@ -1,10 +1,10 @@
 package status
 
 import (
+	"encoding/json"
 	"fmt"
 	"golang-distributed-parallel-image-processing/api/helpers"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -25,14 +25,26 @@ func StatusResponse(c echo.Context) error {
 
 	workers := []map[string]interface{}{}
 	cc := c.(*helpers.CustomContext)
-	for name, data := range cc.DB {
+	for _, data := range cc.DB {
 		if data.Active {
-			workers = append(workers, map[string]interface{}{
-				"name":   name,
-				"status": data.Status,
-				"tags":   data.Tags,
-				"usage":  data.Usage,
-			})
+			var jsonData map[string]interface{}
+			byteData, err := json.Marshal(data)
+			if err != nil {
+				return helpers.ReturnJSON(c, http.StatusConflict, "Error Marshaling data")
+			}
+			err = json.Unmarshal(byteData, &jsonData)
+			if err != nil {
+				return helpers.ReturnJSON(c, http.StatusConflict, "Error Unmarshaling data")
+			}
+			workers = append(workers, jsonData)
+			// workers = append(workers, map[string]interface{}{
+			// 	"name":     name,
+			// 	"status":   data.Status,
+			// 	"tags":     data.Tags,
+			// 	"usage":    data.Usage,
+			// 	"port":     data.Port,
+			// 	"jobsDone": data.JobsDone,
+			// })
 		}
 	}
 
@@ -58,12 +70,16 @@ func StatusWorkerResponse(c echo.Context) error {
 	worker := c.Param("worker")
 	if workerData, ok := cc.DB[worker]; ok {
 		if workerData.Active {
-			return helpers.ReturnJSONMap(cc.Context, http.StatusOK, map[string]interface{}{
-				"name":   workerData.Name,
-				"tags":   workerData.Tags,
-				"status": workerData.Status,
-				"usage":  strconv.Itoa(workerData.Usage),
-			})
+			var jsonData map[string]interface{}
+			byteData, err := json.Marshal(workerData)
+			if err != nil {
+				return helpers.ReturnJSON(c, http.StatusConflict, "Error Marshaling data")
+			}
+			err = json.Unmarshal(byteData, &jsonData)
+			if err != nil {
+				return helpers.ReturnJSON(c, http.StatusConflict, "Error Unmarshaling data")
+			}
+			return helpers.ReturnJSONMap(cc.Context, http.StatusOK, jsonData)
 		} else {
 			return helpers.ReturnJSON(c, http.StatusConflict, "Worker is not active anymore!")
 		}

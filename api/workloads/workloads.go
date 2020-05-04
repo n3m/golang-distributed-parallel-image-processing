@@ -5,6 +5,7 @@ import (
 	"golang-distributed-parallel-image-processing/api/helpers"
 	"golang-distributed-parallel-image-processing/scheduler"
 	"net/http"
+	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
@@ -29,8 +30,9 @@ func WorkloadsResponse(c echo.Context) error {
 
 	/*TEST*/
 	for e := 0; e < 500; e++ {
+		time.Sleep(time.Second / 10)
 		cc.JOBS <- scheduler.Job{RPCName: "test"}
 	}
 
-	return helpers.ReturnJSON(c, http.StatusOK, "Testing workers with 500 test tasks!")
+	return helpers.ReturnJSON(c, http.StatusOK, "Workloads Test has been completed. A total of 500 tests task were created and completed successfully.")
 }
