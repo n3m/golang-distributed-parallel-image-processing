@@ -59,11 +59,12 @@ func ParseResponse(msg string) models.Worker {
 	worker.Name = data[0]
 	worker.Status = data[1]
 	usage, _ := strconv.Atoi(data[2])
-	worker.Usage = usage
 	worker.Tags = data[3]
 	port, _ := strconv.Atoi(data[4])
-	worker.Port = port
 	jobsDone, _ := strconv.Atoi(data[5])
+
+	worker.Port = port
+	worker.Usage = usage
 	worker.JobsDone = jobsDone
 	worker.Active = true
 	worker.URL = "localhost:" + data[4]

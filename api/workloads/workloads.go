@@ -51,7 +51,6 @@ func WorkloadsResponse(c echo.Context) error {
 }
 
 func WorkloadsFilterResponse(c echo.Context) error {
-	fmt.Println("[ACCESS] New connection to:\t/workloads/test")
 	user := c.Get("user").(*jwt.Token)
 	token := user.Raw
 
@@ -108,16 +107,17 @@ func WorkloadsFilterResponse(c echo.Context) error {
 
 	/* Get File ID */
 	if _, ok := cc.WorkloadsFileID[workloadID]; ok {
+		cc.WorkloadsFileID[workloadID] = cc.WorkloadsFileID[workloadID] + int64(1)
 		fileID = cc.WorkloadsFileID[workloadID]
 	} else {
-		cc.WorkloadsFileID[workloadID] = 0
-		fileID = 0
+		cc.WorkloadsFileID[workloadID] = int64(0)
+		fileID = int64(0)
 	}
 
 	log.Printf("Workload:\n\tName: %+v,\n\tFilter: %+v\n\tFileID: %+v\n\tURL on Server: %+v", workloadID, filter, fileID, fileURLOnServer)
 
 	/*RPC Job*/
-	cc.JOBS <- scheduler.Job{RPCName: "test"}
+	//cc.JOBS <- scheduler.Job{RPCName: "test"}
 
 	return helpers.ReturnJSONMap(c, http.StatusOK, map[string]interface{}{
 		"Workload ID": workloadID,
