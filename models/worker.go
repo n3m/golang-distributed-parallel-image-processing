@@ -9,4 +9,5 @@ type Worker struct {
 	Active   bool   `json:"active"`
 	Port     int    `json:"port"`
 	JobsDone int    `json:"jobsDone"`
+	Token    string `json:"token"`
 }

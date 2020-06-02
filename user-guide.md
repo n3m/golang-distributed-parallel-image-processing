@@ -16,9 +16,9 @@
 
 ## Commands
 
-- ./worker --controller tcp://localhost:40899 --worker-name Ciry --tags gpu,nvidia,assets,static
+- ./worker --controller tcp://localhost:40899 --node-name Ciry --tags gpu,nvidia,assets,static
 
-- ./worker --controller tcp://localhost:40899 --worker-name Miranda --tags gpu,nvidia,assets,static
+- ./worker --controller tcp://localhost:40899 --node-name Miranda --tags gpu,nvidia,assets,static
 
 - curl -u admin:password http://localhost:8080/login
 

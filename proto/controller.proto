@@ -12,11 +12,13 @@ service Controller {
 
 message JobRequest {
     string msg = 1;
+    string args = 2;
 }
 /*Replies*/
 
 message JobReply {
     string msg = 1;
+    string args = 2;
 }
 
 

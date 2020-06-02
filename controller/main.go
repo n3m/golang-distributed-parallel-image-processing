@@ -62,11 +62,13 @@ func ParseResponse(msg string) models.Worker {
 	worker.Tags = data[3]
 	port, _ := strconv.Atoi(data[4])
 	jobsDone, _ := strconv.Atoi(data[5])
+	token := data[6]
 
 	worker.Port = port
 	worker.Usage = usage
 	worker.JobsDone = jobsDone
 	worker.Active = true
 	worker.URL = "localhost:" + data[4]
+	worker.Token = token
 	return worker
 }

@@ -37,6 +37,8 @@ var (
 	status            = "Idle"
 	port              = 0
 	jobsDone          = 0
+	storeToken        = ""
+	storeEndpoint     = ""
 )
 
 /* System Functions */
@@ -48,8 +50,10 @@ func die(format string, v ...interface{}) {
 
 func init() {
 	flag.StringVar(&controllerAddress, "controller", "tcp://localhost:40899", "Controller address")
-	flag.StringVar(&workerName, "worker-name", "hard-worker", "Worker Name")
+	flag.StringVar(&workerName, "node-name", "hard-worker", "Worker Name")
 	flag.StringVar(&tags, "tags", "gpu,superCPU,largeMemory", "Comma-separated worker tags")
+	flag.StringVar(&storeToken, "image-store-token", "token", "Image Store Token")
+	flag.StringVar(&storeEndpoint, "image-store-endpoint", "url_endpoint", "Image Store URL")
 }
 
 /* Response Functions */
@@ -146,6 +150,6 @@ func main() {
 }
 
 func createDataString() string {
-	data := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags + "|" + strconv.Itoa(port) + "|" + strconv.Itoa(jobsDone)
+	data := workerName + "|" + status + "|" + strconv.Itoa(usage) + "|" + tags + "|" + strconv.Itoa(port) + "|" + strconv.Itoa(jobsDone) + "|" + storeToken
 	return data
 }
