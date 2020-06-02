@@ -74,6 +74,12 @@ func LoadModules() []*Module {
 			Function:   workloads.WorkloadsResponse,
 			Middleware: &IsLoggedIn,
 		},
+		{
+			Method:     "POST",
+			Path:       "/workloads/filter",
+			Function:   workloads.WorkloadsFilterResponse,
+			Middleware: &IsLoggedIn,
+		},
 	}
 }
 

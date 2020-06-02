@@ -26,6 +26,7 @@ func ReturnJSONMap(c echo.Context, status int, data map[string]interface{}) erro
 
 type CustomContext struct {
 	echo.Context
-	DB   map[string]models.Worker
-	JOBS chan scheduler.Job
+	DB              map[string]models.Worker
+	WorkloadsFileID map[string]int64
+	JOBS            chan scheduler.Job
 }
