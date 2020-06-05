@@ -3,14 +3,25 @@ package helpers
 import (
 	"golang-distributed-parallel-image-processing/models"
 	"golang-distributed-parallel-image-processing/scheduler"
+	"log"
 
 	"github.com/labstack/echo"
 )
 
 var ActiveTokens map[string]bool = make(map[string]bool)
+var ActiveBotTokens map[string]bool = make(map[string]bool)
 
 func IsTokenActive(token string) bool {
 	if _, ok := ActiveTokens[token]; ok {
+		return true
+	}
+	return false
+}
+
+func IsBotTokenActive(token string) bool {
+	log.Printf("Bot token: %+v", token)
+	log.Printf("%+v", ActiveBotTokens)
+	if _, ok := ActiveBotTokens[token]; ok {
 		return true
 	}
 	return false

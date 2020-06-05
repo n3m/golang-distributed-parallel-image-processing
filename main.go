@@ -12,7 +12,6 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/sonyarouje/simdb/db"
 )
 
 func main() {
@@ -23,22 +22,15 @@ func main() {
 	/* Setup Variables */
 	ControllerConnectionURL := "tcp://localhost:40899"
 	APIPort := ":8080"
-	DBName := "workers"
 	currentWorkers := map[string]models.Worker{}
 	jobs := make(chan scheduler.Job)
 	workloadsFileNumbers := make(map[string]int64)
-
-	/* DB Setup */
-	db, err := db.New(DBName)
-	if err != nil {
-		panic(err)
-	}
 
 	/* Scheduler Setup */
 	go scheduler.Start(jobs, currentWorkers)
 
 	/* Controller Setup */
-	go controller.Start(ControllerConnectionURL, currentWorkers, db)
+	go controller.Start(ControllerConnectionURL, currentWorkers)
 	log.Printf("[SETUP] Controller Connection URL: %+v", ControllerConnectionURL)
 
 	/* API EndPoint Setup */
@@ -83,6 +75,8 @@ func main() {
 			break
 		}
 	}
+
+	helpers.ActiveBotTokens["admin"] = true //REMOVE ///000
 
 	go e.Logger.Fatal(e.Start(APIPort))
 

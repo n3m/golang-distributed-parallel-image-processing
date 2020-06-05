@@ -63,10 +63,9 @@ func LoadModules() []*Module {
 			Middleware: &IsLoggedIn,
 		},
 		{
-			Method:     "POST",
-			Path:       "/upload",
-			Function:   upload.UploadResponse,
-			Middleware: &IsLoggedIn,
+			Method:   "POST",
+			Path:     "/upload",
+			Function: upload.UploadResponse,
 		},
 		{
 			Method:     "GET",

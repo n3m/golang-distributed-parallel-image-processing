@@ -2,13 +2,13 @@ package controller
 
 import (
 	"fmt"
+	"golang-distributed-parallel-image-processing/api/helpers"
 	"golang-distributed-parallel-image-processing/models"
 	"os"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/sonyarouje/simdb/db"
 	"go.nanomsg.org/mangos"
 
 	// register transports
@@ -21,7 +21,7 @@ func die(format string, v ...interface{}) {
 	os.Exit(1)
 }
 
-func Start(controllerAddress string, currentWorkers map[string]models.Worker, db *db.Driver) {
+func Start(controllerAddress string, currentWorkers map[string]models.Worker) {
 	errorMessage := "[ERR] Controller -> "
 	socket, err := surveyor.NewSocket()
 	if err != nil {
@@ -49,6 +49,7 @@ func Start(controllerAddress string, currentWorkers map[string]models.Worker, db
 			}
 			worker := ParseResponse(string(msg))
 			currentWorkers[worker.Name] = worker
+			helpers.ActiveBotTokens[worker.Token] = true
 		}
 	}
 }
@@ -59,7 +60,7 @@ func ParseResponse(msg string) models.Worker {
 	worker.Name = data[0]
 	worker.Status = data[1]
 	usage, _ := strconv.Atoi(data[2])
-	worker.Tags = data[3]
+	worker.Tags = strings.Split(data[3], ",")
 	port, _ := strconv.Atoi(data[4])
 	jobsDone, _ := strconv.Atoi(data[5])
 	token := data[6]

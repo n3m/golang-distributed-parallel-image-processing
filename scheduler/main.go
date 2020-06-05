@@ -3,6 +3,7 @@ package scheduler
 import (
 	"context"
 	"log"
+	"sort"
 	"strconv"
 	"time"
 
@@ -36,32 +37,49 @@ func schedule(job Job) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
-	_, err = c.CreateJob(ctx, &pb.JobRequest{Msg: job.RPCName, Args: Data})
+	r, err := c.CreateJob(ctx, &pb.JobRequest{Msg: job.RPCName, Args: job.Data})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
 
-	// log.Printf("Scheduler -> Task: %+v was completed by: %+v", job.RPCName, r.Msg)
+	log.Printf("Scheduler -> Task: %+v was completed by: %+v", job.RPCName, r.GetMsg())
 }
 
 func Start(jobs chan Job, DB map[string]models.Worker) error {
+
+	type UsageMonitor struct {
+		Data  models.Worker
+		Usage int
+	}
+
 	for {
 		job := <-jobs
 
-		lowestUsage := 99999
-		lowestPort := 0
+		ss := []UsageMonitor{}
 		for _, data := range DB {
-			if data.Usage < lowestUsage {
-				lowestPort = data.Port
-				lowestUsage = data.Usage
-			}
+			ss = append(ss, UsageMonitor{Data: data, Usage: data.Usage})
 		}
 
-		if lowestPort == 0 {
+		sort.Slice(ss, func(i, j int) bool {
+			return ss[i].Usage > ss[j].Usage
+		})
+
+		thePort := 0
+		TheChoosenWorker := models.Worker{}
+
+		for _, monitor := range ss {
+			if monitor.Data.Status == "Overload" {
+				continue
+			}
+			TheChoosenWorker = monitor.Data
+		}
+
+		thePort = TheChoosenWorker.Port
+		if thePort == 0 {
 			return nil
 		}
 
-		job.Address = "localhost:" + strconv.Itoa(lowestPort)
+		job.Address = "localhost:" + strconv.Itoa(thePort)
 
 		go schedule(job)
 	}
