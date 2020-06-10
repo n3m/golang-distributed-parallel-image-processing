@@ -3,7 +3,6 @@ package helpers
 import (
 	"golang-distributed-parallel-image-processing/models"
 	"golang-distributed-parallel-image-processing/scheduler"
-	"log"
 
 	"github.com/labstack/echo"
 )
@@ -19,8 +18,6 @@ func IsTokenActive(token string) bool {
 }
 
 func IsBotTokenActive(token string) bool {
-	log.Printf("Bot token: %+v", token)
-	log.Printf("%+v", ActiveBotTokens)
 	if _, ok := ActiveBotTokens[token]; ok {
 		return true
 	}

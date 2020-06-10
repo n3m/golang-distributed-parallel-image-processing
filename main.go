@@ -50,10 +50,10 @@ func main() {
 
 	fmt.Println("\tSTATIC:\t" + "/public")
 	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
-		Root:   "public",
+		Root:   "public/results",
 		Browse: true,
 	}))
-	e.Use(middleware.Static("public"))
+	e.Use(middleware.Static("public/results"))
 
 	for _, mod := range modules {
 		switch mod.Method {

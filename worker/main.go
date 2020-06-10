@@ -77,17 +77,17 @@ func (s *server) CreateJob(ctx context.Context, in *pb.JobRequest) (*pb.JobReply
 		/* DO TASK */
 		in.GetArgs()
 		args := in.GetArgs()
-		workID, filter, fileID, fileURLOnServer, fileExt := getArgsForFilter(args)
+		workID, filter, fileID, fileNameOnServer, fileExt := getArgsForFilter(args)
 		log.Printf("[Worker] %+v: I've been called to do a filter: %+v", workerName, filter)
 
 		/*Create Repo*/
 		_ = os.MkdirAll(workerName+"/"+workID+"/", 0755)
 
 		//Download file
-		fileUrl := storeEndpoint + "/" + fileURLOnServer
+		downloadURL := storeEndpoint + "/download"
 		urlOnTheWorker := workerName + "/" + workID + "/" + fileID + "." + fileExt
 
-		err := DownloadFile(urlOnTheWorker, fileUrl)
+		err := DownloadFileFromServer(workID, storeToken, fileNameOnServer, downloadURL, urlOnTheWorker)
 		if err != nil {
 			log.Printf("[ERR] Error downloading file: %+v", err.Error())
 		}
@@ -328,6 +328,81 @@ func SendPostRequest(workID string, token string, urlToSend string, filename str
 		return nil
 	} else {
 		return errors.New("[SendPostRequest()] Could not upload file.")
+	}
+
+}
+
+func DownloadFileFromServer(workID string, token string, image_id string, urlToSend string, filepath string) error {
+	/*Initial Request Values*/
+	requestBody := &bytes.Buffer{}
+	multiPartWriter := multipart.NewWriter(requestBody)
+
+	/* Insert Token */
+	tokenSender, err := multiPartWriter.CreateFormField("worker-token")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	_, err = tokenSender.Write([]byte(token))
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	/* Insert WorkloadID */
+	workloadSender, err := multiPartWriter.CreateFormField("workload_id")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	_, err = workloadSender.Write([]byte(workID))
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	/* Insert image_id */
+	imageSender, err := multiPartWriter.CreateFormField("image_id")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	_, err = imageSender.Write([]byte(image_id))
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	/*Close RequestBody*/
+	multiPartWriter.Close()
+
+	/*Setup request*/
+	request, err := http.NewRequest("POST", urlToSend, requestBody)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	request.Header.Add("Content-Type", multiPartWriter.FormDataContentType())
+
+	/*Create Request and Send*/
+	client := &http.Client{}
+	response, err := client.Do(request)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode == http.StatusOK {
+		// Create the file
+		out, err := os.Create(filepath)
+		if err != nil {
+			return err
+		}
+		defer out.Close()
+
+		// Writer the body to file
+		_, err = io.Copy(out, response.Body)
+		if err != nil {
+			return err
+		}
+		return nil
+	} else {
+		return errors.New("[DownloadFileFromServer()] Could not download file.")
 	}
 
 }

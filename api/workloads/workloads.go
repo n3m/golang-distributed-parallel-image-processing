@@ -93,7 +93,7 @@ func WorkloadsFilterResponse(c echo.Context) error {
 	objID := primitive.NewObjectID()
 
 	fileURLOnServer := "public/download/" + workloadID + "/" + objID.Hex() + "_" + image.Filename
-	downloadURLOnServer := "download/" + workloadID + "/" + objID.Hex() + "_" + image.Filename
+	fileNameOnServer := objID.Hex() + "_" + image.Filename
 	dst, err := os.Create(fileURLOnServer)
 	if err != nil {
 		return helpers.ReturnJSON(c, http.StatusConflict, "[ERR] Error creating Image on Server. ("+err.Error()+")")
@@ -117,7 +117,7 @@ func WorkloadsFilterResponse(c echo.Context) error {
 
 	fileExt := strings.Split(image.Filename, ".")[1]
 
-	preJobString := workloadID + "|" + filter + "|" + strconv.Itoa(int(fileID)) + "|" + downloadURLOnServer + "|" + fileExt
+	preJobString := workloadID + "|" + filter + "|" + strconv.Itoa(int(fileID)) + "|" + fileNameOnServer + "|" + fileExt
 
 	/*RPC Job*/
 	cc.JOBS <- scheduler.Job{RPCName: "filter", Data: preJobString}

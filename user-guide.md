@@ -16,9 +16,9 @@
 
 ## Commands
 
-- ./worker --controller tcp://localhost:40899 --node-name Ciry --tags gpu,nvidia,assets,static
+- go run . --controller tcp://localhost:40899 --node-name Miranda --tags gpu,nvidia,assets,static --image-store-endpoint localhost:8080 --image-store-token t0k3n-01010
 
-- ./worker --controller tcp://localhost:40899 --node-name Miranda --tags gpu,nvidia,assets,static
+- go run . --controller tcp://localhost:40899 --node-name Ciry --tags gpu,nvidia,assets,static --image-store-endpoint localhost:8080 --image-store-token t0k3n-11125
 
 - curl -u admin:password http://localhost:8080/login
 

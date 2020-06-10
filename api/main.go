@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"golang-distributed-parallel-image-processing/api/download"
 	"golang-distributed-parallel-image-processing/api/login"
 	"golang-distributed-parallel-image-processing/api/logout"
 	"golang-distributed-parallel-image-processing/api/status"
@@ -78,6 +79,12 @@ func LoadModules() []*Module {
 			Path:       "/workloads/filter",
 			Function:   workloads.WorkloadsFilterResponse,
 			Middleware: &IsLoggedIn,
+		},
+
+		{
+			Method:   "POST",
+			Path:     "/download",
+			Function: download.DownloadResponse,
 		},
 	}
 }
