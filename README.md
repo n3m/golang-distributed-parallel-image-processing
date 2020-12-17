@@ -1,18 +1,19 @@
-# Distributed Parallel Image Processing Application
+# Distributed Parallel Image Processing System
+
+## Technologies
+- CUDA
+- gRPC
+- REST API
 
 ## Language
 
 - Golang
+- C++
 
 ## Contributors
 
 - Alan Enrique Maldonado Navarro
 - Guillermo Gonzalez Mena
-
-### Dependencies Commands:
-
-- go get -u github.com/labstack/echo/...
-- go get github.com/dgrijalva/jwt-go
 
 ## Commands
 
